@@ -41,7 +41,7 @@ const Home_Aboutus = () => {
                             of Jeans, Shirts, Cotton Pants, T-Shirts, Blazers,
                             and Capris. We present a very good
                             range of the latest fashion and Ethnic wear
-                            collection for Gentss.
+                            collection for Gents.
                         </p>
                     </motion.div>
 
