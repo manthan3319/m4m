@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navabr_shadow{
+    box-shadow: 4px -6px 13px 10px;
+}
+
+.logo_filter{
+    filter: invert(1);
+}
+
+.slick-prev:before, .slick-next:before {
+    color: black !important;
+    font-size: 29px !important;
+    background: honeydew !important;
+    border-radius: 15px !important;
+}
+
+/* .slick-prev, .slick-next {
+    bottom: -32px !important;
+} */
+
+.slick-prev {
+    left: -14px !important;
+    z-index: 999 !important;
+}
+
+.slick-next {
+    right: 0 !important;
+} 
+
+.blog_box {
+    box-shadow: 0px 0px 6px 1px;
+}
+
+.chatbox-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #0051c8;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+  }
+  
+  .chatbox {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  
+  .chatbox-header {
+    padding: 10px;
+    background-color: #0051c8;
+    color: white;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .chatbox-body {
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .message {
+    margin-bottom: 10px;
+  }
+  
+  .message.bot {
+    text-align: left;
+    color: black;
+  }
+  
+  .message.user {
+    text-align: right;
+    color: blue;
+  }
+  
+  .chatbox-footer {
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 0 0 10px 10px;
+  }
+  
+  .chatbox-footer button {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 10px;
+    border: none;
+    background-color: #0051c8;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .chatbox-footer button:hover {
+    background-color: #033a8a;
+  }
+  
+
+
+.overlay {
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed; 
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999999; 
+}
+
+
+.modal {
+    border-radius: 8px;
+    width: 80%;
+    max-width: 1200px; 
+    max-height: 90%; 
+    overflow: hidden; 
+    position: relative; 
+}
+
+
+.video-player {
+    width: 100%; 
+    height: auto; 
+    max-height: 80vh; 
+    border-radius: 8px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: black; 
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1000; 
+}
+
+
+iframe#\:1\.container {
+  display: none !important;
+}
+
+a.VIpgJd-ZVi9od-l4eHX-hSRGPd {
+  display: none !important;
+}
+
+
+.goog-te-menu-frame {
+  display: none !important;
+}
+.goog-te-menu2 {
+  display: none !important;
+}
