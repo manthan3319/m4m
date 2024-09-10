@@ -7,7 +7,7 @@ const Home_Aboutus = () => {
     const location = useLocation();
     return (
         <div className='bg-white  z-[9999999] relative overflow-hidden '>
-        <div className={`py-[50px]  ${location.pathname !== '/aboutus' ? '  bg-[#000000e8] lg:mt-[80px] mt-[50px] ' : 'bg-[#41414e1a] pt-[120px] '}`}>
+        <div className={`py-[50px]  ${location.pathname !== '/aboutus' ? '  bg-[#000000e8] lg:mt-[80px] mt-[50px] ' : 'bg-[#41414e1a] md:pt-[180px] pt-[120px] '}`}>
             <div className='lg:max-w-[2000px] m-auto px-[10px] '>
                 <div className='flex md:flex-row items-center gap-[25px] flex-col'>
                     

@@ -1,31 +1,76 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { categories } from '../data/categories';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { getProduct } from '../../Admin/Components/Api/Api';
+import { imgurl } from '../../Admin/Components/Credentials/Credentials';
 
 const CategoryDetails = () => {
-  const { categoryName } = useParams();
-  const category = categories.find(cat => cat.name === categoryName);
+  const location = useLocation();
+  const [productData, setProductData] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  // Extract categoryid from the query string
+  const queryParams = new URLSearchParams(location.search);
+  const categoryId = queryParams.get('categoryid');
+
+  // console.log('Category ID:', categoryId);
+
+  // Fetch the product data
+  const fetchProduct = async () => {
+    try {
+      const response = await getProduct();
+      if (response.data.length >= 1) {
+        setProductData(response.data);
+
+        // Filter products by the categoryId from the URL
+        const filtered = response.data.filter(
+          (product) => product.categoryid === categoryId
+        );
+        setFilteredProducts(filtered);
+      } else {
+        setProductData([]);
+        setFilteredProducts([]); // Empty filtered products if no data
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProduct();
+  }, [categoryId]); // Refetch when categoryId changes
 
   return (
     <div className='max-w-[1800px] m-auto px-[10px] pt-[60px] md:pt-[150px] pr mb-[60px]'>
-      <h1 className='text-[30px] font-lato font-bold text-center mb-8'>{category?.name}</h1>
+      <h1 className='text-[30px] font-lato font-bold text-center mb-8'>
+        {filteredProducts.length > 0 ? filteredProducts[0].categoryName : 'Category Not Found'}
+      </h1>
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4'>
-        {category?.products.map((product, index) => (
-          <div key={index} className='relative border rounded-lg overflow-hidden'>
-            <img src={product.image} alt={product.name} className='w-full md:min-h-[400px] md:max-h-[400px] max-h-[180px] rounded-[10px] mb-2' />
-            <div className='p-4'>
-              <h2 className='text-lg font-lato font-bold mb-1'>{product.name}</h2>
-              <div className='flex flex-row gap-[12px]'>
-                <p className='text-gray-700'><b>{product.price}</b></p>
-                <p className='text-gray-500 line-through'>MRP: {product.mrp}</p>
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product, index) => (
+            <div key={index} className='relative border rounded-lg overflow-hidden'>
+              <img
+                src={`${imgurl}/${product.imageName}`}
+                alt={product.productName}
+                className='w-full md:min-h-[400px] md:max-h-[400px] max-h-[180px]  mb-2'
+              />
+              <div className='p-4'>
+                <h2 className='text-lg font-lato font-bold mb-1'>{product.productName}</h2>
+                <div className='flex flex-row gap-[12px]'>
+                  <p className='text-gray-700'><b>₹{product.price}</b></p>
+                  <p className='text-gray-500 line-through'>₹ {product.mrp}</p>
+                </div>
               </div>
+              {/* Coming Soon Tag */}
+              {product.isEnabled ? null : (
+                <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+                  <span className='text-white text-2xl font-bold font-lato'>Coming Soon</span>
+                </div>
+              )}
             </div>
-            {/* Coming Soon Tag */}
-            <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>
-              <span className='text-white text-2xl font-bold font-lato'>Coming Soon</span>
-            </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p>No products available for this category.</p>
+        )}
       </div>
     </div>
   );

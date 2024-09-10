@@ -145,7 +145,7 @@ const ShopeLocation = () => {
 
     return (
         <div className='bg-[#41414e1a]  z-[99] relative overflow-hidden bg-white'>
-            <div className={`lg:max-w-[2000px] m-auto px-[10px]  ${location.pathname !== '/' ? 'pt-[50px] lg:mt-[100px]' : ' pt-[35px] '}`}>
+            <div className={`lg:max-w-[2000px] m-auto px-[10px]  ${location.pathname !== '/' ? 'pt-[50px] lg:mt-[130px]' : ' pt-[30px] '}`}>
                 <div className='text-center pb-[50px]'>
                     <h1 className={`xl:text-[50px] font-lato font-bold border-b inline-block border-black`}>
                         OUR SHOP LOCATIONS

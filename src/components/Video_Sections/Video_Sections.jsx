@@ -29,7 +29,7 @@ const Video_Sections = () => {
         {/* Content on top of the video and overlay */}
         <div ref={ref} className="absolute top-0 w-full text-white flex flex-col justify-center items-center h-full p-4 z-[3]">
           <motion.h1
-            className="lg:text-[55px] text-[40px] font-bold mb-4"
+            className="lg:text-[55px] text-[35px] font-bold mb-4 text-center"
             initial={{ y: -50, opacity: 0 }}
             animate={inView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 1, ease: "easeOut" }}

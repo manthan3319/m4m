@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.7.7",
     "framer-motion": "^11.3.29",
     "geolib": "^3.3.4",
     "i18next": "^23.14.0",
@@ -24,8 +25,10 @@
     "react-modern-drawer": "^1.4.0",
     "react-owl-carousel": "^2.3.3",
     "react-owl-carousel2": "^0.3.0",
+    "react-paginate": "^8.2.0",
     "react-scripts": "5.0.1",
     "react-slick": "^0.30.2",
+    "react-toastify": "^10.0.5",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.1.11",
     "web-vitals": "^2.1.4"

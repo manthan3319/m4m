@@ -21,7 +21,7 @@ const Home_Contactus = () => {
 
     return (
         <div className='bg-white z-[9999999] relative overflow-hidden'>
-            <div className={`${location.pathname !== '/contactus' ? 'lg:py-[80px] py-[50px]' : 'bg-[#41414e1a] py-[100px] lg:pt-[150px]'}`}>
+            <div className={`${location.pathname !== '/contactus' ? 'lg:py-[80px] py-[50px]' : 'bg-[#41414e1a] py-[100px] lg:pt-[180px]'}`}>
                 <div className='lg:max-w-[2000px] m-auto px-[10px]'>
                     <motion.div
                         className='text-center'

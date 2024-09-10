@@ -1,11 +1,33 @@
-import React from 'react';
-import OwlCarousel from 'react-owl-carousel2';
-import 'react-owl-carousel2/lib/styles.css';
-import 'react-owl-carousel2/src/owl.theme.default.css';
+import React, { useState, useEffect, useCallback } from 'react';
 import { blog1 } from '../Images/Images';
+import { getBlog } from '../../Admin/Components/Api/Api';
+import { imgurl } from '../../Admin/Components/Credentials/Credentials';
 
 const Home_Blog = () => {
-    const blogData = [
+    const [blogdata, setblogdata] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const fetchBlog = useCallback(async () => {
+        setLoading(true);
+        try {
+            const response = await getBlog();
+            if (response.data.length >= 1) {
+                setblogdata(response.data);
+            } else {
+                setblogdata([]);
+            }
+        } catch (error) {
+            console.error('Error fetching blogs:', error);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchBlog();
+    }, [fetchBlog]);
+
+    const staticBlogData = [
         {
             id: 1,
             category: "Business",
@@ -14,87 +36,60 @@ const Home_Blog = () => {
             image: blog1,
             date: "1 Sep 2023",
             rating: 4.5
-        },
+        }
     ];
 
-    const options = {
-        items: 5,
-        nav: true,
-        rewind: true,
-        autoplay: true,
-        loop: true,
-        margin: 20,
-        dots: true,
-        navText: [
-            "<div class='owl-prev'><i class='fa fa-angle-left' aria-hidden='true'></i></div>",
-            "<div class='owl-next'><i class='fa fa-angle-right' aria-hidden='true'></i></div>"
-        ],
-        responsive: {
-            0: {
-                items: 1, 
-                nav: true,
-            },
-            600: {
-                items: 2, 
-                nav: true,
-            },
-            1000: {
-                items: 3,
-                nav: true,
-            },
-            1200: {
-                items: 4, 
-                nav: true,
-            },
-            1400: {
-                items: 5, 
-                nav: true,
-            }
-        }
+    const blogDataToDisplay = blogdata.length > 0 ? blogdata : staticBlogData;
+
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
     };
-    
 
     return (
-        <div className='py-[130px]'>
+        <div className='md:py-[170px] py-[110px]'>
             <div className='lg:max-w-[2000px] m-auto px-[10px]'>
-                <div className='text-center pt-[25px]'>
-                    <h1 className='lg:text-[45px] font-lato font-bold border-b-2 inline-block text-[35px]'>Here is our blog's</h1>
+                <div className='text-center'>
+                    <h1 className='lg:text-[45px] font-lato font-bold border-b-2 inline-block text-[35px]'>
+                        Here is our blog's
+                    </h1>
                 </div>
 
-                <div className='mt-[50px]'>
-                    <OwlCarousel options={options}>
-                        {blogData.map(blog => (
-                            <div key={blog.id} className='lg:w-[100%] border-[2px] border-black rounded-[5px] blog_box'>
-                                <div className='overflow-hidden'>
-                                    <img 
-                                        src={blog.image} 
-                                        alt='blog' 
-                                        className='w-[100%] min-h-[220px] max-h-[220px] transition-transform duration-500 ease-in-out transform hover:scale-105' 
-                                    />
-                                </div>
-                                <div className='p-[15px]'>
-                                    <h2 className='font-poppins text-[19px] font-semibold '>{blog.category}</h2>
-                                    <h1 className='font-lato lg:text-[25px] font-bold mt-[7px]'>{blog.title}</h1>
-                                    <p className='font-roboto text-[16px] mt-[5px]'>{blog.description}</p>
-                                </div>
-                                <div className='flex justify-between border-t-2 p-[15px]'>
-                                    <div>
-                                        <p><span><i className="fa fa-calendar" aria-hidden="true"></i></span> {blog.date}</p>
-                                    </div>
-                                    <div className='flex gap-[5px]'>
-                                        {Array.from({ length: 5 }).map((_, index) => {
-                                            const rating = blog.rating - index;
-                                            return (
-                                                <span key={index}>
-                                                    <i className={`fa ${rating >= 1 ? 'fa-star' : rating > 0.5 ? 'fa-star-half-o' : 'fa-star-o'}`} aria-hidden="true"></i>
-                                                </span>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
+                <div className='mt-[50px] grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-10'>
+                    {blogDataToDisplay.map(blog => (
+                        <div key={blog.id} className='border-[2px] border-black rounded-[5px] blog_box'>
+                            <div className='overflow-hidden'>
+                                <img
+                                    src={blog.imageName ? `${imgurl}/${blog.imageName}` : blog1}  
+                                    alt='blog'
+                                    className='w-[100%] min-h-[220px] max-h-[220px] transition-transform duration-500 ease-in-out transform hover:scale-105'
+                                />
                             </div>
-                        ))}
-                    </OwlCarousel>
+                            <div className='p-[15px]'>
+                                <h2 className='font-poppins text-[19px] font-semibold'>{blog.Category}</h2>
+                                <h1 className='font-lato lg:text-[25px] font-bold mt-[7px]'>{blog.Title}</h1>
+                                <p className='font-roboto text-[16px] mt-[5px]'>{blog.Content}</p>
+                            </div>
+                            <div className='flex justify-between border-t-2 p-[15px]'>
+                                <div>
+                                    <p className='flex flex-row gap-[10px]'>
+                                        <span><i className="fa fa-calendar" aria-hidden="true"></i></span> 
+                                        {formatDate(blog.createDate)}  
+                                    </p>
+                                </div>
+                                {/* <div className='flex gap-[5px]'>
+                                    {Array.from({ length: 5 }).map((_, index) => {
+                                        const rating = blog.rating - index;
+                                        return (
+                                            <span key={index}>
+                                                <i className={`fa ${rating >= 1 ? 'fa-star' : rating > 0.5 ? 'fa-star-half-o' : 'fa-star-o'}`} aria-hidden="true"></i>
+                                            </span>
+                                        );
+                                    })}
+                                </div> */}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

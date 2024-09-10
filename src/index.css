@@ -172,3 +172,7 @@ a.VIpgJd-ZVi9od-l4eHX-hSRGPd {
 .goog-te-menu2 {
   display: none !important;
 }
+
+.ReactModal__Overlay.ReactModal__Overlay--after-open {
+  background: #000000bf !important;
+}
