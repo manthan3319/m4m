@@ -23,12 +23,15 @@ const shopLocations = [
     { id: 7, position: [21.1783, 72.8256], name: 'Satellite Rd, near YAMUNA CHOWK, Vrundavan Society-1, Mota Varachha, Surat, Gujarat 394101', photo: 'https://via.placeholder.com/150' },
     { id: 8, position: [21.1744, 72.8218], name: 'GF 4, Avalon Business Hub, Aamba Talavadi, Priya Park Society, Katargam, Surat, Gujarat 395004', photo: 'https://via.placeholder.com/150' },
 ];
+
 const Home_ShopLocations = () => {
     const location = useLocation();
     const [mapInstance, setMapInstance] = useState(null);
     const [userLocation, setUserLocation] = useState(null);
+    const [geoError, setGeoError] = useState(null); // Track if there's an error
 
     useEffect(() => {
+        // Set map view to user location if available
         if (mapInstance && userLocation) {
             mapInstance.setView(userLocation, 15);
         }
@@ -41,22 +44,24 @@ const Home_ShopLocations = () => {
                 (position) => {
                     const { latitude, longitude } = position.coords;
                     setUserLocation([latitude, longitude]);
+                    setGeoError(null); // Reset error if successful
                 },
                 (error) => {
-                    console.error("Error getting user location:", error);
-                    alert("Unable to retrieve your location. Please ensure location services are enabled.");
+                    setGeoError(error.message); // Set error message instead of alert
                 }
             );
         } else {
-            alert("Geolocation is not supported by this browser.");
+            setGeoError("Geolocation is not supported by this browser.");
         }
     }, []);
 
     const handleNearbyMeClick = () => {
         if (userLocation && mapInstance) {
+            // Focus map on user location if available
             mapInstance.setView(userLocation, 15);
         } else {
-            alert("Unable to determine your location. Please make sure location services are enabled.");
+            // If user location is unavailable, provide a smooth fallback
+            setGeoError("Unable to determine your location.");
         }
     };
 
@@ -64,7 +69,7 @@ const Home_ShopLocations = () => {
         <div className='bg-white z-[9999999] relative overflow-hidden'>
             <div className={`${location.pathname !== '/location' ? 'lg:mt-[0px]' : ' '}`}>
                 <div className={`lg:max-w-[2000px] m-auto px-[10px]`}>
-                    <div
+                    <motion.div
                         className='text-center'
                         initial="hidden"
                         whileInView="visible"
@@ -89,25 +94,27 @@ const Home_ShopLocations = () => {
                         >
                             Nearby Me
                         </button>
-                    </div>
+                        {geoError && <p className="text-red-500 mt-2">{geoError}</p>}
+                    </motion.div>
                 </div>
                 <div className='w-full h-[500px] relative'>
                     <MapContainer 
                         center={[21.1736, 72.8311]} 
                         zoom={15} 
                         className='h-full w-full' 
-                        whenCreated={setMapInstance}  // Set map instance on creation
+                        whenCreated={setMapInstance}
                     >
                         {/* Base Map Layer */}
                         <TileLayer
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         />
-                        {/* Satellite View Layer (Mapbox) */}
+                        {/* Satellite View Layer (optional) */}
                         <TileLayer
                             url="https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=YOUR_MAPBOX_ACCESS_TOKEN"
                             attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a>'
                         />
+                        {/* Markers for shop locations */}
                         {shopLocations.map(location => (
                             <Marker 
                                 key={location.id} 
@@ -122,6 +129,7 @@ const Home_ShopLocations = () => {
                                 </Popup>
                             </Marker>
                         ))}
+                        {/* Marker for user location if available */}
                         {userLocation && (
                             <Marker position={userLocation} icon={customMarker}>
                                 <Popup>You are here</Popup>
@@ -135,5 +143,3 @@ const Home_ShopLocations = () => {
 }
 
 export default Home_ShopLocations;
-
-

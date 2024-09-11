@@ -46,9 +46,9 @@ const Home_Gallery = () => {
   return (
     <div className='bg-[#41414e1a] lg:py-[50px] lg:pt-[180px] pt-[95px]'>
       <div className='lg:max-w-[2000px] m-auto px-[10px]'>
-        <div className='text-center'>
-        <h1 className={`xl:text-[50px] font-lato font-bold border-b inline-block border-black`}>
-            <span className='relative text-customBlue'>Our Culture</span>
+        <div className='text-center pb-[20px] pt-[20px] md:pt-[120px] lg:pt-0'>
+        <h1 className={`xl:text-[50px] sm:text-[40px] text-[30px] font-lato font-bold border-b inline-block border-black`}>
+            Our Culture
           </h1>
         </div>
       

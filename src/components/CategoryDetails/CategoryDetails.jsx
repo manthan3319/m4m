@@ -40,11 +40,11 @@ const CategoryDetails = () => {
   }, [categoryId]); // Refetch when categoryId changes
 
   return (
-    <div className='max-w-[1800px] m-auto px-[10px] pt-[60px] md:pt-[150px] pr mb-[60px]'>
+    <div className='max-w-[1800px] m-auto px-[10px] pt-[90px] md:pt-[150px] pr mb-[60px]'>
       <h1 className='text-[30px] font-lato font-bold text-center mb-8'>
         {filteredProducts.length > 0 ? filteredProducts[0].categoryName : 'Category Not Found'}
       </h1>
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4'>
+      <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4'>
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product, index) => (
             <div key={index} className='relative border rounded-lg overflow-hidden'>
