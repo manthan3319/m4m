@@ -1,8 +1,5 @@
 import React, { useRef, useState } from 'react';
 import Slider from 'react-slick';
-import pandesra2 from "../Images/pandesra 2.mp4";
-import ramchok from "../Images/ram chok 2.mp4";
-import adajan from "../Images/adajan 5.mp4";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -56,17 +53,17 @@ const Store_video_slider = () => {
   const shopDetails = [
     {
       address: "Plot no.33-42, Near Panchmukhi Hanuman Mandir BRTS, Bamroli Althan Expy, opp. D Mart, Pandesara, Surat, Gujarat 394221",
-      videoSrc: pandesra2,
+      videoSrc: "/pandesra 2.mp4",
       mapLink: "https://maps.google.com/?q=Plot+no.33-42,+Near+Panchmukhi+Hanuman+Mandir+BRTS,+Bamroli+Althan+Expy,+opp.+D+Mart,+Pandesara,+Surat,+Gujarat+394221"
     },
     {
       address: "Ground Laxminarayan Apartment, 2, Ghod Dod Rd, near Airtel Office, Ram Chowk, Athwa, Surat, Gujarat 395007",
-      videoSrc: ramchok,
+      videoSrc: "/ram chok 2.mp4",
       mapLink: "https://maps.google.com/?q=Ground+Laxminarayan+Apartment,+2,+Ghod+Dod+Rd,+near+Airtel+Office,+Ram+Chowk,+Athwa,+Surat,+Gujarat+395007"
     },
     {
       address: "Jay Ranchhod Complex, A/12, Anand Mahal Rd, Adajan, Surat, Gujarat 395009",
-      videoSrc: adajan,
+      videoSrc: "/adajan 5.mp4",
       mapLink: "https://maps.google.com/?q=Jay+Ranchhod+Complex,+A/12,+Anand+Mahal+Rd,+Adajan,+Surat,+Gujarat+395009"
     },
   ];
