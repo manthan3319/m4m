@@ -109,16 +109,17 @@ const Add_blog = () => {
 
   const customStyles = {
     content: {
-      top: '50%',
+      top: '59%', // Default top position for larger screens
       left: '50%',
       right: 'auto',
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
-      width: '50%',
-      maxWidth: '800px',
       borderRadius: '10px',
       padding: '20px',
+      '@media (max-width: 640px)': { // For small screens (sm)
+        top: '50%',
+      },
     },
   };
 
@@ -127,7 +128,7 @@ const Add_blog = () => {
       <div>
         <Saidbar />
       </div>
-      <div className='ml-[250px] px-[30px] pt-[25px]'>
+      <div className='sm:ml-[250px] px-[30px] pt-[25px]'>
         <div className='mt-[31px]'>
           <h2 className="text-2xl font-bold mb-4 font-roboto text-[32px] border-b-[2px] pb-[15px] border-black">Add Blog & Delete
           </h2>
@@ -148,9 +149,9 @@ const Add_blog = () => {
             <p>Loading blogs...</p>
           ) : blogdata.length > 0 ? (
             blogdata.map((blog) => (
-              <div key={blog._id} className="border-b-[1px] pb-4 mb-4">
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center">
+              <div key={blog._id} className="sm:border-b-[1px] pb-4 mb-4 border-[1px] sm:p-0 p-[12px] border-black">
+                <div className="flex sm:flex-row flex-col justify-between items-center">
+                  <div className="flex sm:flex-row flex-col items-center">
                     <img
                       src={`${imgurl}/${blog.imageName}`}
                       alt={blog.Category}

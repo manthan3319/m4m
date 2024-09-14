@@ -190,7 +190,7 @@ export const deleteblog = async (blogId) => {
   }
 };
 
-export const addAboutUs = async (formData) => {
+export const AddAboutUs = async (formData) => {
   try {
     const response = await axios.post(`${ApiBaseurl}/Contractor/AddAboutUs`, formData, {
       headers: {
@@ -202,4 +202,31 @@ export const addAboutUs = async (formData) => {
     console.error('Error adding blog:', error);
     throw error;
   }
+};
+
+// Function to fetch homeDetails
+export const getDetails = async () => {
+  try {
+    const response = await axios.post(`${ApiBaseurl}/Contractor/getDetails`);
+    return response.data.data;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    throw error;
+  }
+};
+
+// Function to fetch homeDetails
+export const getAboutus = async () => {
+  try {
+    const response = await axios.post(`${ApiBaseurl}/Contractor/getAboutus`);
+    return response.data.data;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    throw error;
+  }
+};
+
+// Function to fetch homeDetails
+export const UpdateAboutUs = async () => {
+  
 };

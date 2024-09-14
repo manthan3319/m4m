@@ -22,15 +22,17 @@ const Product = () => {
   const productsPerPage = 5; // Adjust this as needed
   const customStyles = {
     content: {
-      top: '50%',
+      top: '55%', // Default top position for larger screens
       left: '50%',
       right: 'auto',
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
-      width: '30%',
       borderRadius: '10px',
       padding: '20px',
+      '@media (max-width: 640px)': { // For small screens (sm)
+        top: '50%',
+      },
     },
   };
 
@@ -124,7 +126,7 @@ const Product = () => {
   return (
     <div>
       <Saidbar />
-      <div className='ml-[250px] px-[30px] pt-[25px]'>
+      <div className='sm:ml-[250px] px-[30px] pt-[25px]'>
         <div className='mt-[31px]'>
           <h2 className="text-2xl font-bold mb-4 font-roboto text-[32px] border-b-[2px] pb-[15px] border-black">Product List</h2>
         </div>
@@ -143,27 +145,32 @@ const Product = () => {
           ) : (
             <>
               {currentProducts.map((product) => (
-                <div key={product.id} className='flex items-center justify-between mb-[15px] border-b-[1px] pb-[15px]'>
-                  <div className='flex items-center gap-x-9'>
+                <div key={product.id} className='flex md:flex-row flex-col gap-[15px] items-center justify-between mb-[15px] border-b-[1px] pb-[15px] md:border-none border-[1px] border-black md:p-0 p-[10px] '>
+                  <div className='flex lg:flex-row flex-col sm:items-center gap-x-9 gap-y-2 w-[100%]'>
                     <div>
-                      <img src={`${imgurl}/${product.imageName}`} alt={product.categoryName} className="w-[70px] h-[70px] rounded-full" />
+                      <img src={`${imgurl}/${product.imageName}`} alt={product.categoryName} className="w-[70px] h-[70px] rounded-full m-auto" />
                     </div>
-                    <div className='flex gap-16'>
-                      <div>
-                        <span className='font-roboto text-[20px] font-bold'>product Name</span>
-                        <p className='text-black font-roboto text-[18px]'>{product.productName}</p>
+                    <div className='flex flex-col md:flex-row  md:gap-16 w-[100%]'>
+                      <div className='flex flex-row sm:gap-[20px] gap-[12px]'>
+                        <div className='w-[50%] md:w-auto'>
+                          <span className='font-roboto md:text-[20px] font-bold text-[15px]'>product Name</span>
+                          <p className='text-black font-roboto md:text-[18px] text-[16px]'>{product.productName}</p>
+                        </div>
+                        <div className='w-[50%] md:w-auto'>
+                          <span className='font-roboto md:text-[19px] font-bold text-[15px]'>Category Name</span>
+                          <p className='text-black font-roboto md:text-[18px] text-[16px]'>{product.categoryName}</p>
+                        </div>
                       </div>
-                      <div>
-                        <span className='font-roboto text-[20px] font-bold'>Category Name</span>
-                        <p className='text-black font-roboto text-[18px]'>{product.categoryName}</p>
-                      </div>
-                      <div>
-                        <span className='font-roboto text-[20px] font-bold'>Price</span>
-                        <p className='text-black font-roboto text-[18px]'>₹{product.price}</p>
-                      </div>
-                      <div>
-                        <span className='font-roboto text-[20px] font-bold'>MRP</span>
-                        <p className='text-black font-roboto text-[18px]'>₹{product.mrp}</p>
+
+                      <div className='flex sm:flex-row  sm:gap-[20px]  gap-[12px] mt-[10px] md:mt-0 border-t-2 sm:border-none'>
+                        <div className='flex flex-row md:flex-col gap-[5px] '>
+                          <span className='font-roboto md:text-[20px] font-bold text-[15px]'>Price:</span>
+                          <p className='text-black font-roboto md:text-[18px] text-[16px]'>₹{product.price}</p>
+                        </div>
+                        <div className=' flex flex-row md:flex-col gap-[5px] '>
+                          <span className='font-roboto md:text-[20px] font-bold text-[15px]'>MRP:</span>
+                          <p className='text-black font-roboto md:text-[18px] text-[16px]'>₹{product.mrp}</p>
+                        </div>
                       </div>
                     </div>
                   </div>

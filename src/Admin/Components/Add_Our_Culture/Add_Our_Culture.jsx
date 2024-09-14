@@ -80,16 +80,17 @@ const Add_Our_Culture = () => {
 
   const customStyles = {
     content: {
-      top: '50%',
+      top: '55%', // Default top position for larger screens
       left: '50%',
       right: 'auto',
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
-      width: '50%',
-      maxWidth: '800px',
       borderRadius: '10px',
       padding: '20px',
+      '@media (max-width: 640px)': { // For small screens (sm)
+        top: '50%',
+      },
     },
   };
 
@@ -98,7 +99,7 @@ const Add_Our_Culture = () => {
       <div>
         <Saidbar />
       </div>
-      <div className='ml-[250px] px-[30px] pt-[25px]'>
+      <div className='sm:ml-[250px] px-[30px] pt-[25px]'>
         <div className='mt-[31px]'>
           <h2 className="text-2xl font-bold mb-4 font-roboto text-[32px] border-b-[2px] pb-[15px] border-black">Our Culture</h2>
         </div>
@@ -157,10 +158,10 @@ const Add_Our_Culture = () => {
       </Modal>
 
       {/* Display Images */}
-      <div className='ml-[250px] px-[30px] pt-[25px]'>
-        <div className="flex flex-wrap">
+      <div className='sm:ml-[250px] px-[30px] pt-[25px]'>
+        <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 grid-cols-2">
           {ourCulture.map((item) => (
-            <div key={item._id} className="relative w-[150px] h-[150px] m-2">
+            <div key={item._id} className="relative  m-2">
               <img
                 src={`${imgurl}/${item.imageName}`}
                 alt={item.imageName}

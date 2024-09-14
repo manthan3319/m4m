@@ -10,15 +10,17 @@ import '../admin.css'
 // Custom styles for Modal (you can customize it)
 const customStyles = {
   content: {
-    top: '50%',
+    top: '55%', // Default top position for larger screens
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    width: '30%',
     borderRadius: '10px',
     padding: '20px',
+    '@media (max-width: 640px)': { // For small screens (sm)
+      top: '50%',
+    },
   },
 };
 
@@ -158,11 +160,11 @@ const Category = () => {
   return (
     <div className="flex">
       <Saidbar />
-      <div className="ml-[250px] px-[30px] pt-[25px] w-full">
+      <div className="sm:ml-[250px] px-[30px] pt-[25px] w-full">
         <div className='mt-[31px]'>
           <h2 className="text-2xl font-bold mb-4 font-roboto text-[32px] border-b-[2px] pb-[15px] border-black">Category List</h2>
         </div>
-        <div className="p-4">
+        <div className="sm:p-4">
           <div>
             <div className="text-right">
               <button
@@ -300,7 +302,7 @@ const Category = () => {
 
             <div className="mt-[20px]">
               {currentCategories.map((category) => (
-                <div key={category._id} className="flex items-center justify-between p-[10px] border-b border-gray-200">
+                <div key={category._id} className="flex sm:flex-row flex-col sm:items-center sm:justify-between gap-[15px] p-[10px] border-b border-gray-200">
                   <div className="flex items-center">
                     <img src={`${imgurl}/${category.imageName}`} alt={category.categoryName} className="w-[50px] h-[50px] rounded-full mr-[10px]" />
                     <div>
@@ -308,7 +310,7 @@ const Category = () => {
                       <p className={`text-sm ${category.comingSoon === "yes" ? "text-red-500" : "text-black"}`}>Coming Soon :  {category.comingSoon} </p>
                     </div>
                   </div>
-                  <div>
+                  <div className='text-right flex sm:flex-row justify-end'>
                     <button
                       className="bg-blue-500 text-white py-[5px] px-[10px] rounded-[5px] mr-[5px]"
                       onClick={() => openUpdateModal(category)}
@@ -327,22 +329,22 @@ const Category = () => {
             </div>
 
             <div>
-            <ReactPaginate
-            pageCount={Math.ceil(categories.length / categoriesPerPage)}
-            pageRangeDisplayed={5}
-            marginPagesDisplayed={2}
-            onPageChange={handlePageClick}
-            containerClassName={'pagination'}
-            pageClassName={'page-item'}
-            pageLinkClassName={'page-link'}
-            previousClassName={'page-item'}
-            previousLinkClassName={'page-link'}
-            nextClassName={'page-item'}
-            nextLinkClassName={'page-link'}
-            breakClassName={'page-item'}
-            breakLinkClassName={'page-link'}
-            activeClassName={'active'}
-          />
+              <ReactPaginate
+                pageCount={Math.ceil(categories.length / categoriesPerPage)}
+                pageRangeDisplayed={5}
+                marginPagesDisplayed={2}
+                onPageChange={handlePageClick}
+                containerClassName={'pagination'}
+                pageClassName={'page-item'}
+                pageLinkClassName={'page-link'}
+                previousClassName={'page-item'}
+                previousLinkClassName={'page-link'}
+                nextClassName={'page-item'}
+                nextLinkClassName={'page-link'}
+                breakClassName={'page-item'}
+                breakLinkClassName={'page-link'}
+                activeClassName={'active'}
+              />
             </div>
           </div>
         </div>
