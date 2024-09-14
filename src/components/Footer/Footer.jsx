@@ -106,7 +106,7 @@ const Footer = () => {
                     </motion.div>
 
                     <div className='text-center py-[20px] border-t-[1px] mt-[50px]'>
-                        <p className='text-white font-oxanium text-[20px]'>Copy Right © Brighten Solutions</p>
+                    <p className='text-white font-oxanium text-[20px]'> <Link to="https://brightensolutions.com/">Copy Right © Brighten Solutions </Link></p>
                     </div>
                 </div>
             </div>
