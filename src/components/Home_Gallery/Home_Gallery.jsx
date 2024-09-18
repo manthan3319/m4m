@@ -53,7 +53,7 @@ const Home_Gallery = () => {
         </div>
       
         <motion.div
-          className='grid lg:grid-cols-7 md:grid-cols-4 grid-cols-2 gap-[20px] py-[35px]'
+          className='grid 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-[20px] py-[35px]'
           variants={containerVariants}
           initial="hidden"
           animate="visible"

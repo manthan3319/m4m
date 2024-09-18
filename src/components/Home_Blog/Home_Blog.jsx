@@ -55,7 +55,7 @@ const Home_Blog = () => {
                     </h1>
                 </div>
 
-                <div className='mt-[50px] grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-10'>
+                <div className='mt-[50px] grid grid-cols-1  xl:grid-cols-4 lg:grid-cols-3 2xl:grid-cols-5 md:grid-cols-2 gap-10'>
                     {blogDataToDisplay.map(blog => (
                         <div key={blog.id} className='border-[2px] border-black rounded-[5px] blog_box'>
                             <div className='overflow-hidden'>
