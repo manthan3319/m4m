@@ -79,7 +79,7 @@ const shopLocations = [
         id: 7,
         position: [21.2338489, 72.7981651], 
         address: 'Satellite Rd, near YAMUNA CHOWK, Vrundavan Society-1, Mota Varachha, Surat, Gujarat 394101',
-        phone: '8734005836',
+        phone: '070436 50096',
         mapLink: 'https://www.google.com/maps/dir//Satellite+Rd,+near+YAMUNA+CHOWK,+Vrundavan+Society-1,+Mota+Varachha,+Surat,+Gujarat+394101/@21.2338489,72.7981651,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be04f37ec28abd3:0xd7841969d5f35f06!2m2!1d72.8805668!2d21.2338689?entry=ttu&g_ep=EgoyMDI0MTAxMy4wIKXMDSoASAFQAw%3D%3D',
         images: [shop2, shop2, shop2],
     },
@@ -87,7 +87,7 @@ const shopLocations = [
         id: 8,
         position: [21.2354796,72.7420026],
         address: 'GF 4, Avalon Business Hub, Aamba Talavadi, Priya Park Society, Katargam, Surat, Gujarat 395004',
-        phone: '7041207596',
+        phone: '070436 50096',
         mapLink: 'https://www.google.com/maps/dir//GF+4,+Avalon+Business+Hub,+Aamba+Talavadi,+Priya+Park+Society,+Katargam,+Surat,+Gujarat+395004/@21.2354796,72.7420026,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be04f8f3ddc2fd7:0x9a600a0b9d532c6d!2m2!1d72.8244043!2d21.2354996?entry=ttu&g_ep=EgoyMDI0MTAxMy4wIKXMDSoASAFQAw%3D%3D',
         images: [shop2, shop2, shop2],
     },
@@ -108,10 +108,8 @@ const FindNearestShop = ({ nearestShop }) => {
     const map = useMap();
 
     useEffect(() => {
-        if (nearestShop && nearestShop.position) {
-            map.setView(nearestShop.position, 13, {
-                animate: true,
-            });
+        if (nearestShop) {
+            map.flyTo(nearestShop.position, 15);
         }
     }, [nearestShop, map]);
 
@@ -169,6 +167,7 @@ const ShopLocation = () => {
             <MapContainer
                 center={[21.1760128, 72.8120898]}
                 zoom={12}
+                scrollWheelZoom={false}
                 style={{ height: '600px', width: '100%' }}
             >
                 <TileLayer
@@ -213,7 +212,7 @@ const ShopLocation = () => {
                 ))}
 
                 {/* Find nearest shop and fly to it */}
-                {nearestShop && <FindNearestShop nearestShop={nearestShop}  />}
+                {nearestShop && <FindNearestShop nearestShop={nearestShop} />}
             </MapContainer>
         </div>
     );

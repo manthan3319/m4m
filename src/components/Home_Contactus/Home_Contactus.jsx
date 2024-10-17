@@ -56,9 +56,9 @@ const Home_Contactus = () => {
                             className='flex md:flex-row flex-col xl:w-[30%] lg:w-[50%] md:w-[50%] w-[100%] items-center gap-[20px] p-[25px] border-black border-[1px] justify-center rounded-[25px] cursor-pointer'
                             variants={itemVariants}
                         >
-                            <a href="tel:+917568519811" className='flex w-full items-center'>
+                            <a href="tel:+917568519811" className='flex w-full items-center gap-[15px]'>
                                 <div className='w-[10%]'>
-                                    <i className="fa fa-phone text-[50px]" aria-hidden="true"></i>
+                                    <i className="fa fa-phone lg:text-[50px] text-[45px] " aria-hidden="true"></i>
                                 </div>
                                 <div className='sm:w-[60%]'>
                                     <h2 className='font-lato font-bold text-[22px]'>BRAND</h2>
@@ -75,7 +75,7 @@ const Home_Contactus = () => {
                         >
                             <a href="mailto:info@m4mformen.com" className='flex w-full items-center gap-[15px]'>
                                 <div className='w-[10%]'>
-                                    <i className="fa fa-envelope text-[45px]" aria-hidden="true"></i>
+                                    <i className="fa fa-envelope lg:text-[45px] text-[40px]" aria-hidden="true"></i>
                                 </div>
                                 <div className='sm:w-[60%]'>
                                     <h2 className='font-lato font-bold text-[22px]'>FOUNDER</h2>
@@ -90,9 +90,9 @@ const Home_Contactus = () => {
                             className='flex md:flex-row flex-col xl:w-[30%] lg:w-[50%] md:w-[50%] w-[100%] items-center gap-[20px] p-[25px] border-black border-[1px] justify-center rounded-[25px] cursor-pointer'
                             variants={itemVariants}
                         >
-                            <a href="tel:+9179-90068568" className='flex w-full items-center'>
+                            <a href="tel:+9179-90068568" className='flex w-full items-center gap-[15px]'>
                                 <div className='w-[10%]'>
-                                    <i className="fa fa-phone text-[50px]" aria-hidden="true"></i>
+                                    <i className="fa fa-phone lg:text-[50px] text-[45px]" aria-hidden="true"></i>
                                 </div>
                                 <div className='sm:w-[60%]'>
                                     <h2 className='font-lato font-bold text-[22px]'>SALES / VACANCY</h2>
