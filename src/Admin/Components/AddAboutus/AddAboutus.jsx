@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import Saidbar from '../Saidbar/Saidbar';
-import { AddAboutUs, getAboutus, UpdateAboutUs } from '../Api/Api';
+import { AddAboutUs, getAboutus } from '../Api/Api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { imgurl } from '../Credentials/Credentials';

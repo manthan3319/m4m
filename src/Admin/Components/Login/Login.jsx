@@ -35,7 +35,7 @@ const Login = () => {
       });
 
       const data = await response.json();
-      console.log(data, "adminlogin");
+      // console.log(data, "adminlogin");
 
       if (response.ok) {
         if (data.data.messages === "Login Successful!") {

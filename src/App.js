@@ -18,6 +18,9 @@ import Product from "./Admin/Components/Product/Product";
 import Add_blog from "./Admin/Components/Add_blog/Add_blog";
 import Add_Our_Culture from "./Admin/Components/Add_Our_Culture/Add_Our_Culture";
 import AddAboutus from "./Admin/Components/AddAboutus/AddAboutus";
+import { Payment } from "./components/Payment/Payment";
+import ChatBoxQus from "./Admin/Components/ChatBoxQus/ChatBoxQus";
+import OurShopLocations from "./Admin/Components/OurShopLocations/OurShopLocations";
 
 const App = () => {
   const location = useLocation();
@@ -35,7 +38,10 @@ const App = () => {
                               location.pathname.startsWith('/addblog') ||
                               location.pathname.startsWith('/Add_Our_Culture') ||
                               location.pathname.startsWith('/login')||
-                              location.pathname.startsWith('/addaboutus');
+                              location.pathname.startsWith('/addaboutus') ||
+                              location.pathname.startsWith('/chatboxque') ||
+                              location.pathname.startsWith('/ourshoplocation');
+
 
   const showChatbox = !hideNavbarAndFooter;
 
@@ -50,6 +56,7 @@ const App = () => {
         <Route path="/gallery" element={<Home_Gallery />} />
         <Route path="/blog" element={<Home_Blog />} />
         <Route path="/category" element={<CategoryDetails />} />
+        <Route path="/Payment" element={<Payment />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/dashboardhome" element={isAuthenticated ? <Dashboard_Home /> : <Navigate to="/login" />} />
@@ -58,6 +65,8 @@ const App = () => {
         <Route path="/addblog" element={isAuthenticated ? <Add_blog /> : <Navigate to="/login" />} />
         <Route path="/addaboutus" element={isAuthenticated ? <AddAboutus /> : <Navigate to="/login" />} />
         <Route path="/Add_Our_Culture" element={isAuthenticated ? <Add_Our_Culture /> : <Navigate to="/login" />} />
+        <Route path="/chatboxque" element={isAuthenticated ? <ChatBoxQus /> : <Navigate to="/login" />} />
+        <Route path="/ourshoplocation" element={isAuthenticated ? <OurShopLocations /> : <Navigate to="/login" />} />
       </Routes>
       {!hideNavbarAndFooter && <Footer />}
       {showChatbox && <Chatbox />}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { facebook, google, happycustomer, justdial } from '../Images/Images';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
@@ -9,13 +9,6 @@ const reviews = [
         altText: 'facebook',
         rating: 3.5,
         count: 500,
-        name: 'Reviews'
-    },
-    {
-        image: justdial,
-        altText: 'justdial',
-        rating: 3.5,
-        count: 1000,
         name: 'Reviews'
     }
 ];
@@ -40,25 +33,53 @@ const renderStars = (rating) => {
 
 const Home_Reviews = () => {
     const { ref, inView } = useInView({
-        triggerOnce: true, // Trigger animation only once
-        threshold: 0.1, // Trigger when 10% of the component is visible
+        triggerOnce: true, // Counter will trigger only once
+        threshold: 0.1,
     });
+
+    const initialCount = 478500;
+    const targetCount = initialCount + 5000; // Increment the target count by 5000
+
+    const [currentCount, setCurrentCount] = useState(() => {
+        // Retrieve the saved count from localStorage or start from the initial count
+        const savedCount = localStorage.getItem('currentCount');
+        return savedCount ? parseInt(savedCount, 10) : initialCount;
+    });
+
+    const [hasCounted, setHasCounted] = useState(false);
+
+    useEffect(() => {
+        let interval;
+        if (inView && !hasCounted) {
+            interval = setInterval(() => {
+                setCurrentCount((prevCount) => {
+                    if (prevCount >= targetCount) {
+                        clearInterval(interval); 
+                        setHasCounted(true); 
+                        return targetCount;
+                    }
+                    const newCount = prevCount + 1;
+                    localStorage.setItem('currentCount', newCount); 
+                    return newCount;
+                });
+            }, 3000);
+        }
+        return () => clearInterval(interval); 
+    }, [inView, hasCounted, currentCount, targetCount]);
 
     return (
         <div className='bg-white z-[9999999] relative overflow-hidden py-10'>
             <div className='-[20px]'>
-                <div className='flex justify-center items-center md:flex-row flex-col md:gap-[100px] mb-[50px]' ref={ref}>
-                    <div className='bg-blue-100 p-6 rounded-lg shadow-lg text-center'>
-                        <h1 className='text-3xl font-bold text-blue-800'>
-                            {inView && (
-                                <CountUp start={0} end={50000} duration={2} separator="," />
-                            )}
+                <div className='grid md:grid-cols-2 grid-cols-1 md:w-[30%] m-auto gap-[20px]' ref={ref}>
+                    <div className='bg-blue-100 p-6 rounded-lg shadow-lg text-center flex items-center flex-col justify-center'>
+                        <h1 className='text-3xl font-bold text-blue-800 mt-2'>
+                            {currentCount}
                         </h1>
                         <p className='text-lg text-blue-600 mt-2'>Our Happy Customers</p>
                     </div>
-                    <div className='flex flex-wrap justify-between items-center gap-[20px] w-full md:w-[30%]'>
+                    <div className='flex flex-wrap justify-between items-center gap-[20px] w-full'>
                         {reviews.map((review, index) => (
-                            <div key={index} className='w-full sm:w-[45%] md:w-[30%] flex flex-col justify-center items-center'>
+                            <div key={index} className='w-full flex flex-col justify-center items-center'>
                                 <img src={review.image} alt={review.altText} className='md:w-[100%] w-[150px] m-auto mb-[20px]' />
                                 <p className='text-black flex gap-[8px] text-[18px]'>
                                     {renderStars(review.rating)}
@@ -77,6 +98,6 @@ const Home_Reviews = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Home_Reviews;

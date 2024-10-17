@@ -6,7 +6,7 @@ import { imgurl } from '../Credentials/Credentials';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-Modal.setAppElement('#root'); // Ensure this matches your root element
+Modal.setAppElement('#root');
 
 const Add_Our_Culture = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -32,9 +32,11 @@ const Add_Our_Culture = () => {
 
   const handleUpload = async () => {
     try {
-      const response = await addOurCulture(files); // Use the new API function
-      toast.success('Images uploaded successfully!');
-      fetchOurCulture(); // Refresh the image list after upload
+      const response = await addOurCulture(files);
+      if (response) {
+        toast.success('Images uploaded successfully!');
+      }
+      fetchOurCulture();
     } catch (error) {
       console.error('Error uploading images:', error);
       toast.error('Failed to upload images.');
@@ -56,19 +58,17 @@ const Add_Our_Culture = () => {
   }, []);
 
   const handleDeleteClick = async (ourCultureId) => {
-    // Show confirmation dialog
     const isConfirmed = window.confirm('Are you sure you want to delete this item?');
-    
+
     if (!isConfirmed) {
-      // User clicked "Cancel", so exit the function
       return;
     }
 
     try {
-      const response = await deleteOurCulture(ourCultureId); 
+      const response = await deleteOurCulture(ourCultureId);
       if (response.data.messages === "Our culture deleted successfully") {
         toast.success('Our culture deleted successfully');
-        fetchOurCulture();  // Refresh the culture list after deletion
+        fetchOurCulture();
       } else {
         toast.error('Failed to delete culture: ' + response.data.messages);
       }
@@ -80,7 +80,7 @@ const Add_Our_Culture = () => {
 
   const customStyles = {
     content: {
-      top: '55%', // Default top position for larger screens
+      top: '55%',
       left: '50%',
       right: 'auto',
       bottom: 'auto',
@@ -88,7 +88,7 @@ const Add_Our_Culture = () => {
       transform: 'translate(-50%, -50%)',
       borderRadius: '10px',
       padding: '20px',
-      '@media (max-width: 640px)': { // For small screens (sm)
+      '@media (max-width: 640px)': {
         top: '50%',
       },
     },
@@ -116,7 +116,6 @@ const Add_Our_Culture = () => {
         </div>
       </div>
 
-      {/* Image Upload Modal */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -157,7 +156,6 @@ const Add_Our_Culture = () => {
         </div>
       </Modal>
 
-      {/* Display Images */}
       <div className='sm:ml-[250px] px-[30px] pt-[25px]'>
         <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 grid-cols-2">
           {ourCulture.map((item) => (

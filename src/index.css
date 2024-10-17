@@ -10,16 +10,9 @@
     filter: invert(1);
 }
 
-.slick-prev:before, .slick-next:before {
-    color: black !important;
-    font-size: 29px !important;
-    background: honeydew !important;
-    border-radius: 15px !important;
+.ReactModal__Overlay.ReactModal__Overlay--after-open {
+  z-index: 99999999999 !important;
 }
-
-/* .slick-prev, .slick-next {
-    bottom: -32px !important;
-} */
 
 .slick-prev {
     left: -14px !important;
@@ -118,9 +111,9 @@
     left: 0;
     right: 0;
     bottom: 0;
+    max-height: 100px;
     display: flex;
     align-items: center;
-    justify-content: center;
     z-index: 999999999; 
 }
 
@@ -173,6 +166,53 @@ a.VIpgJd-ZVi9od-l4eHX-hSRGPd {
   display: none !important;
 }
 
-.ReactModal__Overlay.ReactModal__Overlay--after-open {
-  background: #000000bf !important;
+
+.message {
+  padding: 10px; 
 }
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.modal-overlay {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 99999999999 !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  justify-content: center;
+  max-height: 100vh;
+  overflow-y: hidden;
+}
+.modal-content {
+  width: 30%; 
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.8); /* Background color */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Shadow */
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Hide overflow for better appearance */
+  z-index: 99999999999  !important; 
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+ .modal-content {
+    width: 80%; /* Adjust modal width for small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 90%; /* Adjust modal width for extra small screens */
+  }
+
+  .modal-overlay {
+    align-items: center;
+  }
+}
+
+

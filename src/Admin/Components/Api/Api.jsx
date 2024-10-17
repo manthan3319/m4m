@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { ApiBaseurl } from '../Credentials/Credentials';
 
-// Function to add a category
+
 export const addCategory = async (categoryName, image, comingSoon) => {
   const formData = new FormData();
   formData.append('categoryName', categoryName);
@@ -22,7 +22,7 @@ export const addCategory = async (categoryName, image, comingSoon) => {
   }
 };
 
-// Function to fetch categories
+
 export const getCategory = async () => {
   try {
     const response = await axios.post(`${ApiBaseurl}/Contractor/getCategory`);
@@ -33,7 +33,7 @@ export const getCategory = async () => {
   }
 };
 
-// Function to fetch getProduct
+
 export const getProduct = async () => {
   try {
     const response = await axios.post(`${ApiBaseurl}/Contractor/getProduct`);
@@ -44,7 +44,7 @@ export const getProduct = async () => {
   }
 };
 
-// Function to delete a category
+
 export const deleteCategory = async (categoryId) => {
   try {
     const response = await axios.post(`${ApiBaseurl}/Contractor/categoryDelete`, {
@@ -57,7 +57,7 @@ export const deleteCategory = async (categoryId) => {
   }
 };
 
-// Function to delete a category
+
 export const deleteProduct = async (productId) => {
   try {
     const response = await axios.post(`${ApiBaseurl}/Contractor/productDelete`, {
@@ -92,7 +92,7 @@ export const updateCategory = async (categoryId, categoryName, image, comingSoon
   }
 };
 
-// Function to add a product
+
 export const addProduct = async (formData) => {
   try {
     const response = await axios.post(`${ApiBaseurl}/Contractor/AddProduct`, formData, {
@@ -107,7 +107,7 @@ export const addProduct = async (formData) => {
   }
 };
 
-// Function to add images to our culture
+
 export const addOurCulture = async (files) => {
   const formData = new FormData();
   files.forEach(file => {
@@ -127,7 +127,7 @@ export const addOurCulture = async (files) => {
   }
 };
 
-// Function to fetch out cilture
+
 export const getOurCulture = async () => {
   try {
     const response = await axios.post(`${ApiBaseurl}/Contractor/getOurCulture`);
@@ -138,7 +138,7 @@ export const getOurCulture = async () => {
   }
 };
 
-// Function to delete a Our Culture
+
 export const deleteOurCulture = async (ourCultureId) => {
   try {
     const response = await axios.post(`${ApiBaseurl}/Contractor/ourCultureDelete`, {
@@ -151,7 +151,7 @@ export const deleteOurCulture = async (ourCultureId) => {
   }
 };
 
-// Function to add a blog
+
 export const addBlog = async (formData) => {
   try {
     const response = await axios.post(`${ApiBaseurl}/Contractor/AddBlog`, formData, {
@@ -166,7 +166,7 @@ export const addBlog = async (formData) => {
   }
 };
 
-// Function to fetch getProduct
+
 export const getBlog = async () => {
   try {
     const response = await axios.post(`${ApiBaseurl}/Contractor/getBlog`);
@@ -177,7 +177,7 @@ export const getBlog = async () => {
   }
 };
 
-// Function to delete a category
+
 export const deleteblog = async (blogId) => {
   try {
     const response = await axios.post(`${ApiBaseurl}/Contractor/blogDelete`, {
@@ -204,7 +204,7 @@ export const AddAboutUs = async (formData) => {
   }
 };
 
-// Function to fetch homeDetails
+
 export const getDetails = async () => {
   try {
     const response = await axios.post(`${ApiBaseurl}/Contractor/getDetails`);
@@ -215,7 +215,7 @@ export const getDetails = async () => {
   }
 };
 
-// Function to fetch homeDetails
+
 export const getAboutus = async () => {
   try {
     const response = await axios.post(`${ApiBaseurl}/Contractor/getAboutus`);
@@ -226,7 +226,93 @@ export const getAboutus = async () => {
   }
 };
 
-// Function to fetch homeDetails
+
 export const UpdateAboutUs = async () => {
   
+};
+
+export const addChatBoxQue = async (question, answers) => {
+  try {
+    const response = await axios.post(`${ApiBaseurl}/contractor/addChatBoxQue`, {
+      question: question,
+      answers:answers
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting category:', error);
+    throw error;
+  }
+};
+
+export const getChatBoxQue = async () => {
+  try {
+    const response = await axios.post(`${ApiBaseurl}/Contractor/getChatBoxQueList`);
+    return response.data.data;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    throw error;
+  }
+};
+
+export const deleteChatboxQuestion = async (id) => {
+  try {
+    const response = await axios.post(`${ApiBaseurl}/Contractor/chatBoxQuestionDelete`, {
+      chatboxId: id,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting category:', error);
+    throw error;
+  }
+};
+
+export const addShopLocation = async (formData) => {
+  try {
+    const response = await axios.post(`${ApiBaseurl}/Contractor/AddShopLocation`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error adding blog:', error);
+    throw error;
+  }
+};
+
+export const getShopLocation = async () => {
+  try {
+    const response = await axios.post(`${ApiBaseurl}/Contractor/getShopLocationList`);
+    return response.data.data;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    throw error;
+  }
+};
+
+export const deleteShopLocation = async (id) => {
+  try {
+    const response = await axios.post(`${ApiBaseurl}/Contractor/deleteShopLocation`, {
+      shopid: id,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting category:', error);
+    throw error;
+  }
+};
+
+// Modify the function to accept formData directly
+export const updateShopLocation = async (formData) => {
+  try {
+      const response = await axios.post(`${ApiBaseurl}/Contractor/updateShopLocation`, formData, {
+          headers: {
+              'Content-Type': 'multipart/form-data',
+          },
+      });
+      return response.data;
+  } catch (error) {
+      console.error('Error updating shop location:', error);
+      throw error;
+  }
 };

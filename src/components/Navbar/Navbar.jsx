@@ -62,20 +62,9 @@ const Navbar = () => {
       window.scrollTo(0, 0);
     };
 
-    handleRouteChange(); 
+    handleRouteChange();
   }, [location.pathname]);
 
-  const handleLanguageChange = (lang) => {
-    const frame = document.querySelector('iframe.goog-te-banner-frame');
-    if (frame) {
-      const contentWindow = frame.contentWindow;
-      const langSelector = contentWindow.document.querySelector('select.goog-te-combo');
-      if (langSelector) {
-        langSelector.value = lang;
-        langSelector.dispatchEvent(new Event('change'));
-      }
-    }
-  };
 
   return (
     <div className='w-full'>
@@ -83,11 +72,9 @@ const Navbar = () => {
       <div
         className={`z-[999999999999] px-[50px] py-[10px] md:flex-col justify-between items-center w-full md:block hidden transition-all duration-300 ${isScrolled || location.pathname !== '/' ? 'bg-white navabr_shadow fixed top-0' : 'bg-transparent fixed top-0 left-0'}`}
       >
-        <div className='text-right'>
-          <div className='flex gap-[15px] justify-end'>
+         <div className='flex gap-[15px] justify-end'>
             <div id="google_translate_element"></div>
           </div>
-        </div>
         <div className='flex justify-between'>
           <div className="text-white text-2xl font-bold cursor-pointer">
             <Link to="/">
@@ -114,14 +101,17 @@ const Navbar = () => {
           <div onClick={() => scrollToSection('#home')} className="cursor-pointer">
             <Link to="/"> <img src={logo2} className='w-[120px]' alt='Logo' /></Link>
           </div>
-
+          {/* Google Translate element for mobile */}
+          {/* <div className='flex gap-[15px] justify-end'>
+            <div id="google_translate_element"></div>
+          </div> */}
           <div>
             <button onClick={toggleDrawer}>
               <i className="fa fa-bars text-black text-[35px]" aria-hidden="true"></i>
             </button>
           </div>
         </div>
-        
+
         {/* Drawer */}
         <Drawer
           open={isOpen}
@@ -129,6 +119,8 @@ const Navbar = () => {
           direction='right'
         >
           <div className="gap-[10px] flex flex-col px-[10px] py-[20px]">
+            {/* Google Translate element in drawer */}
+
             {menuItems.map((item) => (
               <Link
                 key={item.name}

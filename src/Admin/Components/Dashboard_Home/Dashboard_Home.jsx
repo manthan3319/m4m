@@ -9,9 +9,7 @@ const Dashboard_Home = () => {
     product: 0,
     culture: 0
   });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -28,9 +26,7 @@ const Dashboard_Home = () => {
         }
       } catch (error) {
         console.error('Error fetching details:', error);
-        setError('Error fetching data');
       } finally {
-        setLoading(false);
       }
     };
 

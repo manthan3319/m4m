@@ -22,6 +22,12 @@ const Footer = () => {
         visible: { scale: 1, transition: { type: 'spring', stiffness: 50 } }
     };
 
+    const socialLinks = [
+        { icon: 'facebook-official', url: 'https://www.facebook.com/m4mformen/photos/?_rdr' },
+        { icon: 'instagram', url: 'https://www.instagram.com/m4m_formen/profilecard/?igsh=MTFvOXowejNhd2VsYw==' },
+        { icon: 'google', url: 'https://www.google.com/search?q=m4mformen&oq=m4mformen&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg8MgYIAhBFGDwyBggDEEUYPDIJCAQQABgNGIAEMggIBRAAGA0YHjIGCAYQRRg8MgYIBxBFGDzSAQg0MjU1ajFqN6gCALACAA&sourceid=chrome&ie=UTF-8' }
+    ];
+
     return (
         <div className='bg-black z-[9999999] relative overflow-hidden'>
             <div className='py-[50px]'>
@@ -78,13 +84,6 @@ const Footer = () => {
                             </div>
 
                             <div className='flex flex-row items-center mt-[15px] text-white gap-[25px]'>
-                                <a href="tel:+919558319830" className="flex items-center gap-[25px] text-white">
-                                    <i className="fa fa-phone text-[30px]" aria-hidden="true"></i>
-                                    <p>+91 9558319830</p>
-                                </a>
-                            </div>
-
-                            <div className='flex flex-row items-center mt-[15px] text-white gap-[25px]'>
                                 <a href="mailto:info@m4mformen.com" className="flex items-center gap-[25px] text-white">
                                     <i className="fa fa-envelope-o text-[30px]" aria-hidden="true"></i>
                                     <p>info@m4mformen.com</p>
@@ -92,26 +91,31 @@ const Footer = () => {
                             </div>
 
                             <motion.div className='flex mt-[50px] flex-row gap-[25px]'>
-                                {['youtube-play', 'facebook-official', 'instagram', 'google'].map((icon, index) => (
-                                    <motion.span
+                                {socialLinks.map((social, index) => (
+                                    <motion.a
                                         key={index}
+                                        href={social.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className='text-white text-[35px]'
                                         variants={iconVariants}
                                     >
-                                        <i className={`fa fa-${icon}`} aria-hidden="true"></i>
-                                    </motion.span>
+                                        <i className={`fa fa-${social.icon}`} aria-hidden="true"></i>
+                                    </motion.a>
                                 ))}
                             </motion.div>
                         </motion.div>
                     </motion.div>
 
                     <div className='text-center py-[20px] border-t-[1px] mt-[50px]'>
-                    <p className='text-white font-oxanium text-[20px]'> <Link to="https://brightensolutions.com/">CopyRight © Brighten Solutions </Link></p>
+                        <p className='text-white font-oxanium text-[20px]'>
+                            <Link to="https://brightensolutions.com/">CopyRight © Brighten Solutions</Link>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default Footer;

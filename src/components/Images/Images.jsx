@@ -44,7 +44,9 @@ import denimjeans4 from "../Images/denimjeans4.jpg";
 import BoxerShorts4 from "../Images/BoxerShorts4.jpg";
 import BoxerShorts3 from "../Images/BoxerShorts3.jpg";
 import BoxerShorts2 from "../Images/BoxerShorts2.jpg";
+import userlocation from "../Images/userlocation.png";
 export {
+    userlocation,
     Shirts2,
     Shirts3,
     Shirts4,

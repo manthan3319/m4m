@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { aboutus } from '../Images/Images';
 import { useLocation  } from 'react-router-dom';
-import { shop2 } from '../Images/Images';
 const Home_Aboutus = () => {
     const location = useLocation();
     return (

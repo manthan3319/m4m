@@ -1,28 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getChatBoxQue } from '../../Admin/Components/Api/Api';
 
 const Chatbox = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [ChatBoxList, setChatBoxList] = useState([]);
   const [messages, setMessages] = useState([
     { type: 'bot', text: 'How can I help you?' }
   ]);
 
-  const predefinedQuestions = [
-    { question: 'What are your store hours?', answer: 'Our store is open from 9 AM to 9 PM every day.' },
-    { question: 'Where are you located?', answer: 'We have multiple locations across Surat. Visit our website for the nearest store.' },
-    { question: 'Do you offer discounts?', answer: 'Yes, we offer discounts on select items. Please check with our staff for details.' }
- 
-  ];
+  const fetchChatBoxList = async () => {
+    try {
+      const response = await getChatBoxQue();
+      setChatBoxList(response.data.length ? response.data : []);
+      console.log("ChatBoxList", response.data);
+    } catch (error) {
+      console.error('Error fetching chat box questions:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchChatBoxList();
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsOpen(true);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleIconClick = () => {
     setIsOpen(!isOpen);
-    handleClearMessages()
+    if (!isOpen) {
+      // If opening the chatbox manually, set the initial bot message
+      setMessages([{ type: 'bot', text: 'How can I help you?' }]);
+    } else {
+      handleClearMessages();
+    }
   };
 
-  const handleQuestionClick = (answer) => {
+  const handleQuestionClick = (question) => {
+    const answers = question.answers;
+
+    const answerText = answers.length > 0 ? answers.map(answer => `• ${answer}`).join('\n\n') : 'No answers available.';
+
     setMessages(prevMessages => [
       ...prevMessages,
-      { type: 'user', text: answer.question },
-      { type: 'bot', text: answer.answer }
+      { type: 'user', text: question.question },
+      { type: 'bot', text: answerText }
     ]);
   };
 
@@ -33,7 +59,7 @@ const Chatbox = () => {
   return (
     <div className='z-[99999999999] relative'>
       <div className="chatbox-icon h-[60px] w-[60px] items-center flex justify-center" onClick={handleIconClick}>
-         <i className="fa fa-comments text-[30px]" aria-hidden="true"></i>
+        <i className="fa fa-comments text-[30px]" aria-hidden="true"></i>
       </div>
 
       {isOpen && (
@@ -45,20 +71,19 @@ const Chatbox = () => {
           <div className="chatbox-body">
             {messages.map((msg, index) => (
               <div key={index} className={`message ${msg.type}`}>
-                {msg.text}
+                {msg.text.split('\n').map((line, i) => (
+                  <div key={i} className="mb-2">{line}</div> // Add margin-bottom for spacing
+                ))}
               </div>
             ))}
           </div>
           <div className="chatbox-footer">
             <h5>Select a question:</h5>
-            {predefinedQuestions.map((q, index) => (
-              <button key={index} onClick={() => handleQuestionClick(q)}>
-                {q.question}
+            {ChatBoxList.map((item) => (
+              <button key={item._id} onClick={() => handleQuestionClick(item)}>
+                {item.question}
               </button>
             ))}
-            {/* <button className="clear-button" onClick={handleClearMessages}>
-              Clear
-            </button> */}
           </div>
         </div>
       )}

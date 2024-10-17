@@ -149,7 +149,7 @@ const Add_blog = () => {
             <p>Loading blogs...</p>
           ) : blogdata.length > 0 ? (
             blogdata.map((blog) => (
-              <div key={blog._id} className="sm:border-b-[1px] pb-4 mb-4 border-[1px] sm:p-0 p-[12px] border-black">
+              <div key={blog._id} className="sm:border-b-[1px] pb-4 mb-4 border-[1px] sm:p-0 p-[12px] border-black sm:border-none">
                 <div className="flex sm:flex-row flex-col justify-between items-center">
                   <div className="flex sm:flex-row flex-col items-center">
                     <img
