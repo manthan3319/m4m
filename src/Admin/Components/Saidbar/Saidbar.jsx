@@ -35,7 +35,7 @@ const Saidbar = () => {
       <div className='hidden sm:block sm:w-[250px] w-[100%] bg-black h-screen fixed top-0 left-0 pt-4'>
         <div className='mb-[10px] border-b-[1px] pb-[10px]'>
           <Link to="/dashboardhome">
-            <img src={logo2} className='w-[150px] logo_filter' alt='logo' />
+            <img src={logo2} className='w-[150px] filter invert brightness-0' alt='logo' />
           </Link>
         </div>
         <ul className='list-none m-0 px-4'>

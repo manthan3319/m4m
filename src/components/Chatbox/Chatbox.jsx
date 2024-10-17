@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getChatBoxQue } from '../../Admin/Components/Api/Api';
 
 const Chatbox = () => {
@@ -7,6 +7,8 @@ const Chatbox = () => {
   const [messages, setMessages] = useState([
     { type: 'bot', text: 'How can I help you?' }
   ]);
+
+  const messagesEndRef = useRef(null);
 
   const fetchChatBoxList = async () => {
     try {
@@ -30,10 +32,16 @@ const Chatbox = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Scroll to the bottom of the chat when messages are updated
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
   const handleIconClick = () => {
     setIsOpen(!isOpen);
     if (!isOpen) {
-      // If opening the chatbox manually, set the initial bot message
       setMessages([{ type: 'bot', text: 'How can I help you?' }]);
     } else {
       handleClearMessages();
@@ -76,6 +84,8 @@ const Chatbox = () => {
                 ))}
               </div>
             ))}
+            {/* This is the div that we scroll to */}
+            <div ref={messagesEndRef}></div>
           </div>
           <div className="chatbox-footer">
             <h5>Select a question:</h5>

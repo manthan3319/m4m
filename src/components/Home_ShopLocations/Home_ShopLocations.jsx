@@ -53,7 +53,7 @@ const shopLocations = [
     },
     {
         id: 4,
-        position: [21.2022308, 72.7121188], 
+        position: [21.2022308, 72.7121188],
         address: 'Jay Ranchhod Complex, A/12, Anand Mahal Rd, Adajan, Surat, Gujarat 395009',
         phone: '091737 50504',
         mapLink: 'https://www.google.com/maps/dir//Jay+Ranchhod+Complex,+A%2F12,+Anand+Mahal+Rd,+Adajan,+Surat,+Gujarat+395009/@21.2022308,72.7121188,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be04dafcec8bf65:0xb226ca16d3bab1fe!2m2!1d72.7945205!2d21.2022508?entry=ttu&g_ep=EgoyMDI0MTAwOS4wIKXMDSoASAFQAw%3D%3D',
@@ -69,7 +69,7 @@ const shopLocations = [
     },
     {
         id: 6,
-        position: [21.2240221, 72.7409507], 
+        position: [21.2240221, 72.7409507],
         address: 'Shop no.2,3, Vihat krupa Residency, Opp. Aashiwad dr House, Vadinath Chowk, Ved Rd, Katargam, Surat, Gujarat 395007',
         phone: '070436 50096',
         mapLink: 'https://www.google.com/maps/dir//Shop+no.2,3,+Vihat+krupa+Residency,+Opp.+Aashiwad+dr+House,+Vadinath+Chowk,+Ved+Rd,+Katargam,+Surat,+Gujarat+395007/@21.2240221,72.7409507,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be04ebdda1f0649:0xb1dca04c3e440868!2m2!1d72.8233524!2d21.2240421?entry=ttu&g_ep=EgoyMDI0MTAxMy4wIKXMDSoASAFQAw%3D%3D',
@@ -77,7 +77,7 @@ const shopLocations = [
     },
     {
         id: 7,
-        position: [21.2338489, 72.7981651], 
+        position: [21.2338489, 72.7981651],
         address: 'Satellite Rd, near YAMUNA CHOWK, Vrundavan Society-1, Mota Varachha, Surat, Gujarat 394101',
         phone: '8734005836',
         mapLink: 'https://www.google.com/maps/dir//Satellite+Rd,+near+YAMUNA+CHOWK,+Vrundavan+Society-1,+Mota+Varachha,+Surat,+Gujarat+394101/@21.2338489,72.7981651,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be04f37ec28abd3:0xd7841969d5f35f06!2m2!1d72.8805668!2d21.2338689?entry=ttu&g_ep=EgoyMDI0MTAxMy4wIKXMDSoASAFQAw%3D%3D',
@@ -85,7 +85,7 @@ const shopLocations = [
     },
     {
         id: 8,
-        position: [21.2354796,72.7420026],
+        position: [21.2354796, 72.7420026],
         address: 'GF 4, Avalon Business Hub, Aamba Talavadi, Priya Park Society, Katargam, Surat, Gujarat 395004',
         phone: '7041207596',
         mapLink: 'https://www.google.com/maps/dir//GF+4,+Avalon+Business+Hub,+Aamba+Talavadi,+Priya+Park+Society,+Katargam,+Surat,+Gujarat+395004/@21.2354796,72.7420026,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3be04f8f3ddc2fd7:0x9a600a0b9d532c6d!2m2!1d72.8244043!2d21.2354996?entry=ttu&g_ep=EgoyMDI0MTAxMy4wIKXMDSoASAFQAw%3D%3D',
@@ -168,7 +168,7 @@ const ShopLocation = () => {
 
             <MapContainer
                 center={[21.1760128, 72.8120898]}
-                zoom={12}
+                zoom={11}
                 style={{ height: '600px', width: '100%' }}
             >
                 <TileLayer
@@ -213,7 +213,7 @@ const ShopLocation = () => {
                 ))}
 
                 {/* Find nearest shop and fly to it */}
-                {nearestShop && <FindNearestShop nearestShop={nearestShop}  />}
+                {nearestShop && <FindNearestShop nearestShop={nearestShop} />}
             </MapContainer>
         </div>
     );

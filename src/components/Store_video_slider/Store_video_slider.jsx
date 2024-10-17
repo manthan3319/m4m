@@ -34,7 +34,6 @@ const Store_video_slider = () => {
 
   const videoRefs = useRef([]);
   const [loaded, setLoaded] = useState([false, false, false]);
-  const [isPlaying, setIsPlaying] = useState([false, false, false]);
 
   const handleVideoLoad = (index) => {
     setLoaded((prevLoaded) => {
@@ -42,18 +41,6 @@ const Store_video_slider = () => {
       updatedLoaded[index] = true;
       return updatedLoaded;
     });
-  };
-
-  const handlePlayVideo = (index) => {
-    const video = videoRefs.current[index];
-    if (video) {
-      video.play();
-      setIsPlaying((prevPlaying) => {
-        const updatedPlaying = [...prevPlaying];
-        updatedPlaying[index] = true;
-        return updatedPlaying;
-      });
-    }
   };
 
   const shopDetails = [
@@ -74,11 +61,6 @@ const Store_video_slider = () => {
     },
   ];
 
-  // Check if the user is on a mobile device
-  const isMobile = () => {
-    return /Mobi|Android/i.test(navigator.userAgent);
-  };
-
   return (
     <div className='overflow-hidden z-[99] relative bg-white md:pt-[50px] px-[10px]'>
       <div className='text-center my-[15px]'>
@@ -97,27 +79,21 @@ const Store_video_slider = () => {
                 className={`w-full sm:h-[800px] object-cover ${!loaded[index] ? 'hidden' : ''}`}
                 muted
                 loop
-                autoPlay={!isMobile()}
+                autoPlay
+                playsInline 
                 onLoadedData={() => handleVideoLoad(index)}
               />
-              {!isPlaying[index] && (
-                <div className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col items-center justify-center transition-opacity duration-300 opacity-100 group-hover:opacity-0'>
-                  <button
-                    onClick={() => handlePlayVideo(index)}
-                    className='text-white text-xl font-bold mb-2'
-                  >
-                    Play Video
-                  </button>
-                  <a href={shop.mapLink} target="_blank" rel="noopener noreferrer" className='text-white text-xl font-bold flex items-center mb-2'>
-                    <span className='mr-2 text-2xl cursor-pointer' aria-hidden="true">
-                      <i className="fa fa-map-marker" aria-hidden="true"></i>
-                    </span>
-                  </a>
-                  <div className='text-white text-center font-lato md:text-[22px] text-[18px] font-bold px-8'>
-                    {shop.address}
-                  </div>
+
+              <div className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col items-center justify-center transition-opacity duration-300 opacity-100 group-hover:opacity-0'>
+                <a href={shop.mapLink} target="_blank" rel="noopener noreferrer" className='text-white text-xl font-bold flex items-center mb-2'>
+                  <span className='mr-2 text-2xl cursor-pointer' aria-hidden="true">
+                    <i className="fa fa-map-marker" aria-hidden="true"></i>
+                  </span>
+                </a>
+                <div className='text-white text-center font-lato md:text-[22px] text-[18px] font-bold px-8'>
+                  {shop.address}
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </Slider>

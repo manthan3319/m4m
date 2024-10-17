@@ -78,7 +78,7 @@ const Navbar = () => {
         <div className='flex justify-between'>
           <div className="text-white text-2xl font-bold cursor-pointer">
             <Link to="/">
-              <img src={logo2} className={`w-[150px] ${isScrolled || location.pathname !== '/' ? '' : 'logo_filter'}`} alt='Logo' />
+              <img src={logo2} className={`w-[150px] ${isScrolled || location.pathname !== '/' ? '' : 'filter invert brightness-0'}`} alt='Logo' />
             </Link>
           </div>
           <div className="lg:gap-[55px] md:gap-[25px] flex items-center">

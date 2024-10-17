@@ -9,7 +9,7 @@ import aboutus from "../Images/aboutus.png";
 import google from "../Images/google.png";
 import facebook from "../Images/facebook.png";
 import justdial from "../Images/justdial.png";
-import logo2 from "../Images/m4m logo Black.png";
+import logo2 from "../Images/logo.png";
 import gallery1 from "../Images/gallery1.jpg";
 import gallery2 from "../Images/gallery2.jpg";
 import gallery3 from "../Images/gallery3.jpg";

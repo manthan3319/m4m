@@ -40,7 +40,7 @@ const Footer = () => {
                         variants={staggerContainer}
                     >
                         <motion.div className='lg:w-[30%] md:w-[49%] w-[100%]' variants={fadeInVariants}>
-                            <img src={logo2} className='w-[180px] logo_filter' alt="M4M logo" />
+                            <img src={logo2} className='w-[180px] filter invert brightness-0' alt="M4M logo" />
                             <p className='text-white mt-[25px] font-poppins'>
                                 M4M For Men is the complete clothing store for Men. M4M For Men has experienced
                                 extraordinary growth and become most popular Men’s wear studio in Surat. It is a mega showroom
