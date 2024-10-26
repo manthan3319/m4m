@@ -198,10 +198,19 @@ a.VIpgJd-ZVi9od-l4eHX-hSRGPd {
   z-index: 99999999999  !important; 
 }
 
+.topbar {
+  position: fixed;
+  z-index: 99999999;
+  width: 100%;
+  top: 0;
+  text-align: right;
+}
+
+
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
  .modal-content {
-    width: 80%; /* Adjust modal width for small screens */
+    width: 80%; 
   }
 }
 
@@ -213,6 +222,7 @@ a.VIpgJd-ZVi9od-l4eHX-hSRGPd {
   .modal-overlay {
     align-items: center;
   }
+
 }
 
 

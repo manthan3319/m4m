@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { aboutus } from '../Images/Images';
 import { useLocation  } from 'react-router-dom';
+import Language from '../Language/Language';
 const Home_Aboutus = () => {
     const location = useLocation();
     return (
@@ -9,7 +10,7 @@ const Home_Aboutus = () => {
         <div className={`py-[50px]  ${location.pathname !== '/aboutus' ? '  bg-[#000000e8] lg:mt-[80px] mt-[50px] ' : 'bg-[#41414e1a] md:pt-[180px] pt-[120px] '}`}>
             <div className='lg:max-w-[2000px] m-auto px-[10px] '>
                 <div className='flex md:flex-row items-center gap-[25px] flex-col'>
-                    
+                
                     {/* Image Section */}
                     <motion.div 
                         className='md:w-[50%]'
@@ -29,6 +30,7 @@ const Home_Aboutus = () => {
                         transition={{ duration: 0.8, delay: 0.4 }}
                         viewport={{ once: true }}
                     >
+                        
                         <h2 className={`text-[45px]  font-bold font-lato mb-[25px]  ${location.pathname !== '/' ? ' text-black' : 'text-white'}`}>About Us</h2>
                         <p className={`text-[22px] font-poppins  ${location.pathname !== '/' ? ' text-black' : 'text-white'}`}>
                             M4M For Men is the complete clothing store

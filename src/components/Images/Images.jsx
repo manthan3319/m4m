@@ -45,7 +45,44 @@ import BoxerShorts4 from "../Images/BoxerShorts4.jpg";
 import BoxerShorts3 from "../Images/BoxerShorts3.jpg";
 import BoxerShorts2 from "../Images/BoxerShorts2.jpg";
 import userlocation from "../Images/userlocation.png";
+import RamChowkAthwa1 from "../Images/Ram Chowk, Athwa/2017-08-30.jpg";
+import RamChowkAthwa2 from "../Images/Ram Chowk, Athwa/2018-05-04.jpg";
+import RamChowkAthwa3 from "../Images/Ram Chowk, Athwa/2019-09-08.jpg";
+import AlthanPandesara1 from "../Images/Bamroli Althan Expy Pandesara/128.jpg";
+import AlthanPandesara2 from "../Images/Bamroli Althan Expy Pandesara/131.jpg";
+import AlthanPandesara3 from "../Images/Bamroli Althan Expy Pandesara/2024-02-17.jpg";
+import GhodDodRdAthwa1 from "../Images/Ghod Dod Rd, Athwa/2019-10-23.jpg";
+import GhodDodRdAthwa2 from "../Images/Ghod Dod Rd, Athwa/2021-04-01 (1).jpg";
+import GhodDodRdAthwa3 from "../Images/Ghod Dod Rd, Athwa/2021-04-01.jpg";
+import AnandMahalRdAdajan1 from "../Images/Anand Mahal Rd, Adajan/2021-08-16.jpg";
+import AnandMahalRdAdaja2 from "../Images/Anand Mahal Rd, Adajan/2023-07-01.jpg";
+import LambeHanumanRd1 from "../Images/EFFIL TOWER, Lambe Hanuman Rd/2018-08-15.jpg";
+import LambeHanumanRd2 from "../Images/EFFIL TOWER, Lambe Hanuman Rd/2018-08-28.jpg";
+import LambeHanumanRd3 from "../Images/EFFIL TOWER, Lambe Hanuman Rd/2020-08-29 (1).jpg";
+import PriyaParkKatargam1 from "../Images/Priya Park Society, Katargam/2024-03-30.jpg";
+import PriyaParkKatargam2 from "../Images/Priya Park Society, Katargam/2024-04-04.jpg";
+
+
+
+
+
 export {
+    RamChowkAthwa1,
+    RamChowkAthwa2,
+    RamChowkAthwa3,
+    AlthanPandesara1,
+    AlthanPandesara2,
+    AlthanPandesara3,
+    GhodDodRdAthwa1,
+    GhodDodRdAthwa2,
+    GhodDodRdAthwa3,
+    AnandMahalRdAdajan1,
+    AnandMahalRdAdaja2,
+    LambeHanumanRd1,
+    LambeHanumanRd2,
+    LambeHanumanRd3,
+    PriyaParkKatargam1,
+    PriyaParkKatargam2,
     userlocation,
     Shirts2,
     Shirts3,

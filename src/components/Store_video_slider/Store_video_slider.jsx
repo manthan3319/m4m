@@ -1,8 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './StoreVideoSlider.css';
+import { getShopLocation } from '../../Admin/Components/Api/Api';
+import { imgurl } from '../../Admin/Components/Credentials/Credentials';
 
 const Store_video_slider = () => {
   const settings = {
@@ -33,7 +35,7 @@ const Store_video_slider = () => {
   };
 
   const videoRefs = useRef([]);
-  const [loaded, setLoaded] = useState([false, false, false]);
+  const [loaded, setLoaded] = useState([]);
 
   const handleVideoLoad = (index) => {
     setLoaded((prevLoaded) => {
@@ -43,23 +45,20 @@ const Store_video_slider = () => {
     });
   };
 
-  const shopDetails = [
-    {
-      address: "Plot no.33-42, Near Panchmukhi Hanuman Mandir BRTS, Bamroli Althan Expy, opp. D Mart, Pandesara, Surat, Gujarat 394221",
-      videoSrc: "/pandesra 2.mp4",
-      mapLink: "https://maps.google.com/?q=Plot+no.33-42,+Near+Panchmukhi+Hanuman+Mandir+BRTS,+Bamroli+Althan+Expy,+opp.+D+Mart,+Pandesara,+Surat,+Gujarat+394221",
-    },
-    {
-      address: "Ground Laxminarayan Apartment, 2, Ghod Dod Rd, near Airtel Office, Ram Chowk, Athwa, Surat, Gujarat 395007",
-      videoSrc: "/ram chok 2.mp4",
-      mapLink: "https://maps.google.com/?q=Ground+Laxminarayan+Apartment,+2,+Ghod+Dod+Rd,+near+Airtel+Office,+Ram+Chowk,+Athwa,+Surat,+Gujarat+395007",
-    },
-    {
-      address: "Jay Ranchhod Complex, A/12, Anand Mahal Rd, Adajan, Surat, Gujarat 395009",
-      videoSrc: "/adajan 5.mp4",
-      mapLink: "https://maps.google.com/?q=Jay+Ranchhod+Complex,+A/12,+Anand+Mahal+Rd,+Adajan,+Surat,+Gujarat+395009",
-    },
-  ];
+  const [sholocationList, setsholocationList] = useState([]);
+
+  const fetchShopLocationList = async () => {
+    try {
+      const response = await getShopLocation();
+      setsholocationList(response.data.length ? response.data : []);
+    } catch (error) {
+      console.error('Error fetching shop locations:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchShopLocationList();
+  }, []);
 
   return (
     <div className='overflow-hidden z-[99] relative bg-white md:pt-[50px] px-[10px]'>
@@ -68,24 +67,24 @@ const Store_video_slider = () => {
       </div>
       <div className='w-full px-[20px] shop_slider'>
         <Slider {...settings}>
-          {shopDetails.map((shop, index) => (
-            <div key={index} className='p-[5px] relative group'>
+          {sholocationList.map((shop, index) => (
+            <div key={shop._id} className='p-[5px] relative group'>
               {!loaded[index] && (
                 <div className='w-full h-[800px] bg-white'></div>
               )}
               <video
                 ref={(el) => (videoRefs.current[index] = el)}
-                src={shop.videoSrc}
+                src={`${imgurl}/${shop.videoName}`} // Use imgurl as base URL for videos
                 className={`w-full sm:h-[800px] object-cover ${!loaded[index] ? 'hidden' : ''}`}
                 muted
                 loop
                 autoPlay
-                playsInline 
+                playsInline
                 onLoadedData={() => handleVideoLoad(index)}
               />
 
               <div className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col items-center justify-center transition-opacity duration-300 opacity-100 group-hover:opacity-0'>
-                <a href={shop.mapLink} target="_blank" rel="noopener noreferrer" className='text-white text-xl font-bold flex items-center mb-2'>
+                <a href={shop.mapsLink} target="_blank" rel="noopener noreferrer" className='text-white text-xl font-bold flex items-center mb-2'>
                   <span className='mr-2 text-2xl cursor-pointer' aria-hidden="true">
                     <i className="fa fa-map-marker" aria-hidden="true"></i>
                   </span>

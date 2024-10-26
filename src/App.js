@@ -21,6 +21,8 @@ import AddAboutus from "./Admin/Components/AddAboutus/AddAboutus";
 import { Payment } from "./components/Payment/Payment";
 import ChatBoxQus from "./Admin/Components/ChatBoxQus/ChatBoxQus";
 import OurShopLocations from "./Admin/Components/OurShopLocations/OurShopLocations";
+import Franchise from "./components/Franchise/Home_Contactus";
+import Topbar from "./components/Topbar/Topbar";
 
 const App = () => {
   const location = useLocation();
@@ -47,10 +49,12 @@ const App = () => {
 
   return (
     <>
+    <Topbar/>
       {!hideNavbarAndFooter && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/franchise" element={<Franchise />} />
         <Route path="/aboutus" element={<About_Us />} />
         <Route path="/location" element={<ShopeLocation />} />
         <Route path="/gallery" element={<Home_Gallery />} />

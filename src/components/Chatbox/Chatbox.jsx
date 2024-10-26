@@ -14,7 +14,7 @@ const Chatbox = () => {
     try {
       const response = await getChatBoxQue();
       setChatBoxList(response.data.length ? response.data : []);
-      console.log("ChatBoxList", response.data);
+      // console.log("ChatBoxList", response.data);
     } catch (error) {
       console.error('Error fetching chat box questions:', error);
     }

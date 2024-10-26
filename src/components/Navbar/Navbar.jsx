@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { logo, logo2 } from '../Images/Images';
+import { logo2 } from '../Images/Images';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
+import Language from '../Language/Language';
 
 const menuItems = [
   { name: 'Home', href: '/' },
@@ -10,6 +11,7 @@ const menuItems = [
   { name: 'Stores', href: '/location' },
   { name: 'Our Blog', href: '/blog' },
   { name: 'Our Culture', href: '/gallery' },
+  { name: 'Franchise', href: '/franchise' },
   { name: 'Contact Us', href: '/contactus', isContact: true },
 ];
 
@@ -26,10 +28,7 @@ const Navbar = () => {
   const scrollToSection = (href) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -46,11 +45,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -58,23 +53,14 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const handleRouteChange = () => {
-      window.scrollTo(0, 0);
-    };
-
-    handleRouteChange();
+    window.scrollTo(0, 0);
   }, [location.pathname]);
-
 
   return (
     <div className='w-full'>
       {/* Desktop Navbar */}
-      <div
-        className={`z-[999999999999] px-[50px] py-[10px] md:flex-col justify-between items-center w-full md:block hidden transition-all duration-300 ${isScrolled || location.pathname !== '/' ? 'bg-white navabr_shadow fixed top-0' : 'bg-transparent fixed top-0 left-0'}`}
-      >
-         <div className='flex gap-[15px] justify-end'>
-            <div id="google_translate_element"></div>
-          </div>
+      <div className={`z-[999999999999] px-[50px] py-[10px] md:flex-col justify-between items-center w-full md:block hidden transition-all duration-300 ${isScrolled || location.pathname !== '/' ? 'bg-white fixed top-[21px]' : 'bg-transparent fixed top-[38px] left-0'}`}>
+        
         <div className='flex justify-between'>
           <div className="text-white text-2xl font-bold cursor-pointer">
             <Link to="/">
@@ -96,15 +82,12 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navbar */}
-      <div className="border-b-[1px] border-black z-[999999999] fixed top-0 left-0 py-[10px] justify-between items-center w-full block md:hidden bg-white px-[10px] transition-all duration-300">
-        <div className='flex items-center w-[100%] justify-between'>
+      <div className="border-b-[1px] border-black z-[999999999] fixed top-[27px] left-0 py-[10px] justify-between items-center w-full block md:hidden bg-white px-[10px] transition-all duration-300">
+        <div className='flex items-center w-[100%] justify-between '>
           <div onClick={() => scrollToSection('#home')} className="cursor-pointer">
             <Link to="/"> <img src={logo2} className='w-[120px]' alt='Logo' /></Link>
           </div>
-          {/* Google Translate element for mobile */}
-          {/* <div className='flex gap-[15px] justify-end'>
-            <div id="google_translate_element"></div>
-          </div> */}
+
           <div>
             <button onClick={toggleDrawer}>
               <i className="fa fa-bars text-black text-[35px]" aria-hidden="true"></i>
@@ -112,15 +95,9 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Drawer */}
-        <Drawer
-          open={isOpen}
-          onClose={toggleDrawer}
-          direction='right'
-        >
-          <div className="gap-[10px] flex flex-col px-[10px] py-[20px]">
-            {/* Google Translate element in drawer */}
 
+        <Drawer open={isOpen} onClose={toggleDrawer} direction='right'>
+          <div className="gap-[10px] flex flex-col px-[10px] py-[20px]">
             {menuItems.map((item) => (
               <Link
                 key={item.name}
@@ -136,6 +113,6 @@ const Navbar = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Navbar;
