@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import Saidbar from '../Saidbar/Saidbar';
-import { AddAboutUs, getAboutus } from '../Api/Api';
+import { AddAboutUs, getAboutus, updateAboutUs } from '../Api/Api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { imgurl } from '../Credentials/Credentials';
@@ -56,55 +56,51 @@ const AddAboutus = () => {
 
     const handleSubmit = async () => {
         if (!content || (!image && !editMode)) {
-            toast.error('Please fill in all fields!');
-            return;
+          toast.error('Please fill in all fields!');
+          return;
         }
     
         setLoading(true);
     
         const formData = new FormData();
-        if (image) {
-            formData.append('image', image);
-        }
+        if (image) formData.append('image', image);
         formData.append('content', content);
     
         try {
-            let response;
-            if (editMode && currentItem && currentItem.id) {
-                // Update existing data
-                console.log('Updating item with id:', currentItem.id); // Log currentItem.id
-                // response = await UpdateAboutUs(currentItem.id, formData); // Include the id for update
-                // if (response.message === "About Us updated successfully") {
-                //     toast.success('About Us updated successfully!');
-                // } else {
-                //     toast.error(response.message);
-                // }
+          let response;
+    
+          if (editMode && currentItem && currentItem._id) {
+            console.log('Updating item with id:', currentItem._id);
+            formData.append('categoryId', currentItem._id); // Include the id in the formData for updating
+            response = await updateAboutUs(formData);
+            if (response.message === "Category updated successfully") {
+              toast.success('About Us updated successfully!');
             } else {
-                // Add new data
-                response = await AddAboutUs(formData);
-                if (response.message === "About Us added successfully") {
-                    toast.success('About Us added successfully!');
-                } else {
-                    toast.error(response.message);
-                }
+              toast.error(response.message);
             }
+          } else {
+            response = await AddAboutUs(formData);
+            if (response.message === "About Us added successfully") {
+              toast.success('About Us added successfully!');
+            } else {
+              toast.error(response.message);
+            }
+          }
     
-            closeModal();
-            // Fetch updated data
-            const updatedData = await getAboutus();
-            setAboutUsData(updatedData.data);
-            if (updatedData.data.length > 0) {
-                setEditMode(true);
-                setCurrentItem(updatedData.data[0]);
-            }
+          closeModal();
+          const updatedData = await getAboutus();
+          setAboutUsData(updatedData.data);
+          if (updatedData.data.length > 0) {
+            setEditMode(true);
+            setCurrentItem(updatedData.data[0]);
+          }
         } catch (error) {
-            console.error('Error uploading About Us content:', error);
-            toast.error('Failed to upload content. Please try again.');
+          console.error('Error uploading About Us content:', error);
+          toast.error('Failed to upload content. Please try again.');
         } finally {
-            setLoading(false);
+          setLoading(false);
         }
-    };
-    
+      };
 
     return (
         <div>

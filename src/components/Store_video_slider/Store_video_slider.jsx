@@ -45,12 +45,12 @@ const Store_video_slider = () => {
     });
   };
 
-  const [sholocationList, setsholocationList] = useState([]);
+  const [sholocationList, setSholocationList] = useState([]);
 
   const fetchShopLocationList = async () => {
     try {
       const response = await getShopLocation();
-      setsholocationList(response.data.length ? response.data : []);
+      setSholocationList(response.data.length ? response.data : []);
     } catch (error) {
       console.error('Error fetching shop locations:', error);
     }
@@ -63,7 +63,9 @@ const Store_video_slider = () => {
   return (
     <div className='overflow-hidden z-[99] relative bg-white md:pt-[50px] px-[10px]'>
       <div className='text-center my-[15px]'>
-        <h2 className='lg:text-[45px] font-bold font-lato text-[35px]'>OUR STORES</h2>
+        <h2 className='lg:text-[45px] font-bold font-lato text-[35px] text-gray-900'>
+          OUR STORES
+        </h2>
       </div>
       <div className='w-full px-[20px] shop_slider'>
         <Slider {...settings}>
@@ -74,22 +76,37 @@ const Store_video_slider = () => {
               )}
               <video
                 ref={(el) => (videoRefs.current[index] = el)}
-                src={`${imgurl}/${shop.videoName}`} // Use imgurl as base URL for videos
-                className={`w-full sm:h-[800px] object-cover ${!loaded[index] ? 'hidden' : ''}`}
+                src={`${imgurl}/${shop.videoName}`}
+                className={`w-full h-[600px] sm:h-[800px] object-cover ${!loaded[index] ? 'hidden' : ''}`}
                 muted
                 loop
                 autoPlay
                 playsInline
                 onLoadedData={() => handleVideoLoad(index)}
-              />
+              >
+                <track
+                  kind="captions"
+                  src={`${imgurl}/${shop.videoName}.vtt`}
+                  srcLang="en"
+                  label="English"
+                  default
+                />
+              </video>
 
-              <div className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col items-center justify-center transition-opacity duration-300 opacity-100 group-hover:opacity-0'>
-                <a href={shop.mapsLink} target="_blank" rel="noopener noreferrer" className='text-white text-xl font-bold flex items-center mb-2'>
+              <div className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-75 flex flex-col items-center justify-center transition-opacity duration-300 opacity-100 group-hover:opacity-0'>
+                <a
+                  href={shop.mapsLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className='text-white text-xl font-bold flex items-center mb-2'
+                  aria-label={`Open location of ${shop.address} in Google Maps`}
+                >
                   <span className='mr-2 text-2xl cursor-pointer' aria-hidden="true">
                     <i className="fa fa-map-marker" aria-hidden="true"></i>
                   </span>
+                  <span className="sr-only">View on Google Maps</span>
                 </a>
-                <div className='text-white text-center font-lato md:text-[22px] text-[18px] font-bold px-8'>
+                <div className='text-white text-center font-lato md:text-[24px] text-[20px] font-bold px-8'>
                   {shop.address}
                 </div>
               </div>

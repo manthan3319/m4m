@@ -206,6 +206,19 @@ a.VIpgJd-ZVi9od-l4eHX-hSRGPd {
   text-align: right;
 }
 
+.text-shadow-md {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+button {
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #e5b97f; /* Slightly darker shade */
+}
+
+
+
 
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {

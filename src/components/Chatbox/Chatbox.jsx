@@ -14,7 +14,6 @@ const Chatbox = () => {
     try {
       const response = await getChatBoxQue();
       setChatBoxList(response.data.length ? response.data : []);
-      // console.log("ChatBoxList", response.data);
     } catch (error) {
       console.error('Error fetching chat box questions:', error);
     }
@@ -32,7 +31,6 @@ const Chatbox = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Scroll to the bottom of the chat when messages are updated
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -50,7 +48,6 @@ const Chatbox = () => {
 
   const handleQuestionClick = (question) => {
     const answers = question.answers;
-
     const answerText = answers.length > 0 ? answers.map(answer => `• ${answer}`).join('\n\n') : 'No answers available.';
 
     setMessages(prevMessages => [
@@ -73,22 +70,21 @@ const Chatbox = () => {
       {isOpen && (
         <div className="chatbox">
           <div className="chatbox-header">
-            <h4>Chat with us</h4>
+            <h2>Chat with us</h2> {/* Updated from <h4> */}
             <button onClick={handleIconClick}>X</button>
           </div>
           <div className="chatbox-body">
             {messages.map((msg, index) => (
               <div key={index} className={`message ${msg.type}`}>
                 {msg.text.split('\n').map((line, i) => (
-                  <div key={i} className="mb-2">{line}</div> // Add margin-bottom for spacing
+                  <div key={i} className="mb-2">{line}</div>
                 ))}
               </div>
             ))}
-            {/* This is the div that we scroll to */}
             <div ref={messagesEndRef}></div>
           </div>
           <div className="chatbox-footer">
-            <h5>Select a question:</h5>
+            <h3>Select a question:</h3> {/* Updated from <h5> */}
             {ChatBoxList.map((item) => (
               <button key={item._id} onClick={() => handleQuestionClick(item)}>
                 {item.question}

@@ -23,6 +23,7 @@ import ChatBoxQus from "./Admin/Components/ChatBoxQus/ChatBoxQus";
 import OurShopLocations from "./Admin/Components/OurShopLocations/OurShopLocations";
 import Franchise from "./components/Franchise/Home_Contactus";
 import Topbar from "./components/Topbar/Topbar";
+import ContactDetails from "./Admin/Components/ContactDetails/ContactDetails";
 
 const App = () => {
   const location = useLocation();
@@ -42,14 +43,15 @@ const App = () => {
                               location.pathname.startsWith('/login')||
                               location.pathname.startsWith('/addaboutus') ||
                               location.pathname.startsWith('/chatboxque') ||
-                              location.pathname.startsWith('/ourshoplocation');
+                              location.pathname.startsWith('/ourshoplocation') ||
+                              location.pathname.startsWith('/ContactDetails');
 
 
   const showChatbox = !hideNavbarAndFooter;
 
   return (
     <>
-    <Topbar/>
+    {!hideNavbarAndFooter && <Topbar />}
       {!hideNavbarAndFooter && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -69,6 +71,7 @@ const App = () => {
         <Route path="/addblog" element={isAuthenticated ? <Add_blog /> : <Navigate to="/login" />} />
         <Route path="/addaboutus" element={isAuthenticated ? <AddAboutus /> : <Navigate to="/login" />} />
         <Route path="/Add_Our_Culture" element={isAuthenticated ? <Add_Our_Culture /> : <Navigate to="/login" />} />
+        <Route path="/ContactDetails" element={isAuthenticated ? <ContactDetails /> : <Navigate to="/login" />} />
         <Route path="/chatboxque" element={isAuthenticated ? <ChatBoxQus /> : <Navigate to="/login" />} />
         <Route path="/ourshoplocation" element={isAuthenticated ? <OurShopLocations /> : <Navigate to="/login" />} />
       </Routes>

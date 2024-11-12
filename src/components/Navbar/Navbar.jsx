@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { logo2 } from '../Images/Images';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import Language from '../Language/Language';
+import logo2 from '../Images/logo.png';
 
 const menuItems = [
   { name: 'Home', href: '/' },
@@ -20,6 +20,11 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = logo2; // Preload logo image
+  }, []);
 
   const toggleDrawer = () => {
     setIsOpen(prevState => !prevState);
@@ -94,7 +99,6 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-
 
         <Drawer open={isOpen} onClose={toggleDrawer} direction='right'>
           <div className="gap-[10px] flex flex-col px-[10px] py-[20px]">

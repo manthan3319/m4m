@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { logo2 } from '../Images/Images';
 import { motion } from 'framer-motion';
+import { getContactDetails } from '../../Admin/Components/Api/Api';
 
 const Footer = () => {
     const fadeInVariants = {
@@ -27,6 +28,34 @@ const Footer = () => {
         { icon: 'instagram', url: 'https://www.instagram.com/m4m_formen/profilecard/?igsh=MTFvOXowejNhd2VsYw==' },
         { icon: 'google', url: 'https://www.google.com/search?q=m4mformen&oq=m4mformen&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg8MgYIAhBFGDwyBggDEEUYPDIJCAQQABgNGIAEMggIBRAAGA0YHjIGCAYQRRg8MgYIBxBFGDzSAQg0MjU1ajFqN6gCALACAA&sourceid=chrome&ie=UTF-8' }
     ];
+
+    const [aboutUsData, setAboutUsData] = useState([]);
+    const [address, setAddress] = useState('');
+    const [contact, setContact] = useState('');
+
+    const fetchAboutUsData = async () => {
+        try {
+            const data = await getContactDetails();
+            if (data.success && data.data) {
+                setAboutUsData(data.data);
+                // Extract the address and contact based on roles
+                const footerAddress = data.data.find(item => item.role === 'FooterAddress');
+                const footerContact = data.data.find(item => item.role === 'FooterContact');
+                if (footerAddress) {
+                    setAddress(footerAddress.address);
+                }
+                if (footerContact) {
+                    setContact(footerContact.contact);
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching About Us data:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchAboutUsData();
+    }, []);
 
     return (
         <div className='bg-black z-[9999999] relative overflow-hidden'>
@@ -55,7 +84,7 @@ const Footer = () => {
                                 Company
                             </h1>
                             <ul className='mt-[25px] flex flex-col gap-[15px]'>
-                                {[
+                                {[ 
                                     { name: 'Home', href: '/' },
                                     { name: 'About us', href: '/aboutus' },
                                     { name: 'Blog', href: '/blog' },
@@ -80,13 +109,13 @@ const Footer = () => {
                             </h1>
                             <div className='flex flex-row items-center mt-[15px] text-white gap-[25px]'>
                                 <i className="fa fa-map-marker text-[30px]" aria-hidden="true"></i>
-                                <p>Ground Laxminarayan Apartment, 2, Ghod Dod Rd, Athwa, Surat, Gujarat 395007</p>
+                                <p>{address || 'Loading address...'}</p>
                             </div>
 
                             <div className='flex flex-row items-center mt-[15px] text-white gap-[25px]'>
-                                <a href="mailto:info@m4mformen.com" className="flex items-center gap-[25px] text-white">
+                                <a href={`mailto:${contact || 'info@m4mformen.com'}`} className="flex items-center gap-[25px] text-white">
                                     <i className="fa fa-envelope-o text-[30px]" aria-hidden="true"></i>
-                                    <p>info@m4mformen.com</p>
+                                    <p>{contact || 'info@m4mformen.com'}</p>
                                 </a>
                             </div>
 
@@ -99,6 +128,7 @@ const Footer = () => {
                                         rel="noopener noreferrer"
                                         className='text-white text-[35px]'
                                         variants={iconVariants}
+                                        aria-label={`Visit our ${social.icon.replace('-official', '')} page`} // Added aria-label
                                     >
                                         <i className={`fa fa-${social.icon}`} aria-hidden="true"></i>
                                     </motion.a>

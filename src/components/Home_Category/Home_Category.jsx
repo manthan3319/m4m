@@ -11,7 +11,6 @@ const Home_Category = () => {
   const [categories, setCategories] = useState([]);
   const [isStatic, setIsStatic] = useState(false);
 
-  // Static categories data (shown when API fails)
   const staticCategories = [
     { id: 1, categoryName: 'DENIM JEANS', imageName: denimjeans4 },
     { id: 2, categoryName: 'Boxer Shorts', imageName: BoxerShorts2 },
@@ -39,8 +38,6 @@ const Home_Category = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
-
-  // console.log("categories", categories);
 
   const settings = {
     dots: true,
@@ -72,28 +69,33 @@ const Home_Category = () => {
     <div className='bg-white z-[99] relative overflow-hidden'>
       <div className='max-w-[1800px] m-auto px-[10px] my-[50px]'>
         <Slider {...settings}>
-          {categories.map((category) => (
-            <div key={category.id} className='relative flex flex-col items-center'>
-              {/* Conditional rendering for the "Coming Soon" overlay */}
+          {categories.map((category, index) => (
+            <div key={category._id || index} className='relative flex flex-col items-center'>
               {category.comingSoon === "yes" ? (
                 <div className='relative'>
                   <img
                     src={isStatic ? category.imageName : `${imgurl}/${category.imageName}`}
-                    alt={category.categoryName}
-                    className='sm:w-[200px] sm:h-[200px] w-[150px] h-[150px] rounded-[50%] m-auto'
+                    alt={`Image of ${category.categoryName}`}
+                    className='sm:w-[200px] sm:h-[200px] w-[150px] h-[150px] rounded-[50%] m-auto object-cover'
+                    loading="lazy"
                   />
-                 <div className='absolute inset-0 flex items-center justify-center sm:w-[203px] sm:h-[200px] w-[150px] top-0 left-0 m-auto bg-black bg-opacity-50 rounded-full'>
-                    <span className='text-white sm:text-2xl font-bold font-lato text-[18px] text-center'>Coming Soon <br></br>{category.categoryName}</span>
+
+                  <div className='absolute inset-0 flex items-center justify-center sm:w-[203px] sm:h-[200px] w-[150px] top-0 left-0 m-auto bg-black bg-opacity-80 rounded-full'>
+                    <span className='text-white sm:text-2xl font-bold font-lato text-[18px] text-center text-shadow-md'>
+                      Coming Soon <br /> {category.categoryName}
+                    </span>
                   </div>
                 </div>
               ) : (
                 <Link to={isStatic ? '#' : `/category/?categoryid=${category._id}`} className={`text-center ${isStatic ? 'pointer-events-none' : ''}`}>
                   <img
                     src={isStatic ? category.imageName : `${imgurl}/${category.imageName}`}
-                    alt={category.categoryName}
-                    className='sm:w-[200px] sm:h-[200px] w-[150px] h-[150px] rounded-[50%] m-auto'
+                    alt={`Image of ${category.categoryName}`}
+                    className='sm:w-[200px] sm:h-[200px] w-[150px] h-[150px] rounded-[50%] m-auto object-cover'
+                    loading="lazy"
                   />
-                  <h1 className='text-[20px] font-lato font-bold mt-[15px] text-center'>{category.categoryName}</h1>
+
+                  <h1 className='text-[20px] font-lato font-bold mt-[15px] text-center text-shadow-md'>{category.categoryName}</h1>
                 </Link>
               )}
             </div>

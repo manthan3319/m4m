@@ -302,7 +302,6 @@ export const deleteShopLocation = async (id) => {
   }
 };
 
-// Modify the function to accept formData directly
 export const updateShopLocation = async (formData) => {
   try {
       const response = await axios.post(`${ApiBaseurl}/Contractor/updateShopLocation`, formData, {
@@ -316,3 +315,44 @@ export const updateShopLocation = async (formData) => {
       throw error;
   }
 };
+
+
+export const updateAboutUs = async (formData) => {
+  try {
+    const response = await axios.post(`${ApiBaseurl}/Contractor/updateAboutUs`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error adding blog:', error);
+    throw error;
+  }
+};
+
+export const updateContact = async (editData) => {
+  try {
+    const response = await axios.post(`${ApiBaseurl}/Contractor/updateContact`, editData, {
+      headers: {
+        'Content-Type': 'application/json',  
+      },
+    });
+    return response.data; 
+  } catch (error) {
+    console.error('Error updating contact:', error);
+    throw error;  
+  }
+};
+
+
+export const getContactDetails = async () => {
+  try {
+    const response = await axios.post(`${ApiBaseurl}/Contractor/getContactDetails`);
+    return response.data.data;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    throw error;
+  }
+};
+

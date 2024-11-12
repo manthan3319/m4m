@@ -47,8 +47,9 @@ const CategoryDetails = () => {
               <img
                 src={`${imgurl}/${product.imageName}`}
                 alt={product.productName}
-                className='w-full md:min-h-[400px] md:max-h-[400px] max-h-[180px]  mb-2'
+                className='w-full md:min-h-[400px] md:max-h-[400px] max-h-[180px] mb-2 object-cover' // Added object-cover to maintain aspect ratio
               />
+
               <div className='p-4'>
                 <h2 className='text-lg font-lato font-bold mb-1'>{product.productName}</h2>
                 <div className='flex flex-row gap-[12px]'>

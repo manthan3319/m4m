@@ -54,17 +54,17 @@ const Home_Reviews = () => {
             interval = setInterval(() => {
                 setCurrentCount((prevCount) => {
                     if (prevCount >= targetCount) {
-                        clearInterval(interval); 
-                        setHasCounted(true); 
+                        clearInterval(interval);
+                        setHasCounted(true);
                         return targetCount;
                     }
                     const newCount = prevCount + 1;
-                    localStorage.setItem('currentCount', newCount); 
+                    localStorage.setItem('currentCount', newCount);
                     return newCount;
                 });
             }, 3000);
         }
-        return () => clearInterval(interval); 
+        return () => clearInterval(interval);
     }, [inView, hasCounted, currentCount, targetCount]);
 
     return (
@@ -94,7 +94,14 @@ const Home_Reviews = () => {
                         ))}
                     </div>
                 </div>
-                <iframe src='https://widgets.sociablekit.com/google-reviews/iframe/25456177' frameBorder='0' width='100%' height='250'></iframe>
+                <iframe
+                    src='https://widgets.sociablekit.com/google-reviews/iframe/25456177'
+                    frameBorder='0'
+                    width='100%'
+                    height='250'
+                    title='Google Reviews Widget'>
+                </iframe>
+
             </div>
         </div>
     );

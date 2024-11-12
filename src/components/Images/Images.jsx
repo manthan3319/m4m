@@ -61,13 +61,14 @@ import LambeHanumanRd2 from "../Images/EFFIL TOWER, Lambe Hanuman Rd/2018-08-28.
 import LambeHanumanRd3 from "../Images/EFFIL TOWER, Lambe Hanuman Rd/2020-08-29 (1).jpg";
 import PriyaParkKatargam1 from "../Images/Priya Park Society, Katargam/2024-03-30.jpg";
 import PriyaParkKatargam2 from "../Images/Priya Park Society, Katargam/2024-04-04.jpg";
-
+import mapmarkerm4m from "./mapmarkerm4m.png"
 
 
 
 
 export {
     RamChowkAthwa1,
+    mapmarkerm4m,
     RamChowkAthwa2,
     RamChowkAthwa3,
     AlthanPandesara1,

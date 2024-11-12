@@ -12,7 +12,8 @@ const links = [
   { path: '/Add_Our_Culture', label: 'Our Culture' },
   { path: '/chatboxque', label: 'Chat box Que' },
   { path: '/ourshoplocation', label: 'Our Shop Location' },
-  // { path: '/addaboutus', label: 'About Us' }
+  { path: '/addaboutus', label: 'About Us' },
+  { path: '/ContactDetails', label: 'Update Contact' }
 ];
 
 const Saidbar = () => {
